@@ -83,7 +83,7 @@ class StockspertGUI:
         earnings,
         volume
     ):
-        recommendation = get_recommendation(
+        recommendation, rule = get_recommendation(
             trend.lower(),
             pe.lower(),
             revenue.lower(),
@@ -106,7 +106,7 @@ class StockspertGUI:
         )
 
         self.analysis["rule"].configure(
-            text=f"Rule Fired: {recommendation}"
+            text=f"Rule Fired: {rule}"
         )
 
     def run(self):

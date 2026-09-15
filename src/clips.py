@@ -50,16 +50,25 @@ def get_recommendation(
 
     output = result.stdout
     
-    match = re.search(
+    recommendation_match = re.search(
         r"RECOMMENDATION:\s*(BUY|HOLD|SELL)",
         output,
         re.IGNORECASE
     )
 
-    if match:
-        return match.group(1)
+    rule_match = re.search(
+        r"^\s*RULE:\s*(.+)$",
+        output,
+        re.MULTILINE | re.IGNORECASE
+    )
+
+    if recommendation_match:
+        recommendation = recommendation_match.group(1).upper()
+        rule = rule_match.group(1).strip() if rule_match else "UNKNOWN"
+
+        return recommendation, rule
 
     if "RECOMMENDATION: N/A" in output:
-        return "N/A"
+        return "N/A", "NO-CLEAR-RECOMMENDATION"
 
-    return "ERROR"
+    return "ERROR", "ERROR"
