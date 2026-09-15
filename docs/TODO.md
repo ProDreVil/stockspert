@@ -3,9 +3,9 @@
 ## 1. Core Expert System
 
 * [x] Set up `main.py`
-* [ ] Connect GUI to CLIPS
-* [ ] Connect GUI market inputs to CLIPS facts
-* [ ] Make existing CLIPS rules work with the GUI
+* [x] Connect GUI to CLIPS
+* [x] Connect GUI market inputs to CLIPS facts
+* [x] Make existing CLIPS rules work with the GUI
 * [ ] Fix rule overlap / recommendation priority
 * [ ] Add portfolio facts to CLIPS
 

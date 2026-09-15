@@ -89,19 +89,34 @@ def create_entry(parent, variable=None, **kwargs):
 def create_dropdown(parent, variable, values):
     style = ttk.Style()
 
+    style.theme_use("clam")
+
     style.configure(
         "Stockspert.TCombobox",
         fieldbackground=GRAPH_COLOR,
         background=GRAPH_COLOR,
         foreground=TEXT_COLOR,
         arrowcolor=TEXT_COLOR,
-        borderwidth=0
+        borderwidth=0,
+        relief="flat"
     )
 
     style.map(
         "Stockspert.TCombobox",
-        fieldbackground=[("readonly", GRAPH_COLOR)],
-        foreground=[("readonly", TEXT_COLOR)]
+        fieldbackground=[
+            ("readonly", GRAPH_COLOR),
+            ("focus", GRAPH_COLOR)
+        ],
+        foreground=[
+            ("readonly", TEXT_COLOR),
+            ("focus", TEXT_COLOR)
+        ],
+        selectbackground=[
+            ("readonly", GRAPH_COLOR)
+        ],
+        selectforeground=[
+            ("readonly", TEXT_COLOR)
+        ]
     )
 
     return ttk.Combobox(
