@@ -14,7 +14,10 @@ from gui.header import build_header
 from gui.market import build_market
 from gui.portfolio import build_portfolio
 from gui.simulation import build_simulation
-from gui.analysis import build_analysis
+from gui.analysis import (
+    build_analysis,
+    update_reasons,
+)
 from gui.graph import StockGraph
 
 
@@ -107,6 +110,11 @@ class StockspertGUI:
 
         self.analysis["rule"].configure(
             text=f"Rule Fired: {rule}"
+        )
+
+        update_reasons(
+            self.analysis["reasons"],
+            rule
         )
 
     def run(self):

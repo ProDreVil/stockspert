@@ -3,12 +3,124 @@ import tkinter as tk
 from config import (
     BUY_COLOR,
     GRAPH_COLOR,
+    HOLD_COLOR,
     SECONDARY_TEXT,
+    SELL_COLOR,
     TEXT_COLOR,
 )
 
 from gui.components import create_section, create_label
 
+
+def update_reasons(reasons_frame, rule):
+    for widget in reasons_frame.winfo_children():
+        widget.destroy()
+
+    reason_map = {
+        "BUY-UPTREND-LOW-PE": [
+            ("Uptrend", BUY_COLOR),
+            ("Low P/E Ratio", BUY_COLOR),
+            ("Positive Revenue Growth", BUY_COLOR),
+            ("Positive Earnings Growth", BUY_COLOR),
+        ],
+
+        "BUY-UPTREND-FAIR-PE": [
+            ("Uptrend", BUY_COLOR),
+            ("Fair P/E Ratio", HOLD_COLOR),
+            ("Positive Revenue Growth", BUY_COLOR),
+            ("Positive Earnings Growth", BUY_COLOR),
+        ],
+
+        "BUY-UPTREND-HIGH-VOLUME": [
+            ("Uptrend", BUY_COLOR),
+            ("Low P/E Ratio", BUY_COLOR),
+            ("Positive Revenue Growth", BUY_COLOR),
+            ("Positive Earnings Growth", BUY_COLOR),
+            ("High Trading Volume", BUY_COLOR),
+        ],
+
+        "HOLD-SIDEWAYS-POSITIVE-EARNINGS": [
+            ("Sideways Trend", HOLD_COLOR),
+            ("Positive Earnings Growth", BUY_COLOR),
+        ],
+
+        "HOLD-UPTREND-LOW-PE-NEUTRAL-REVENUE": [
+            ("Uptrend", BUY_COLOR),
+            ("Low P/E Ratio", BUY_COLOR),
+            ("Neutral Revenue Growth", HOLD_COLOR),
+            ("Positive Earnings Growth", BUY_COLOR),
+        ],
+
+        "HOLD-UPTREND-FAIR-PE-NEUTRAL-REVENUE": [
+            ("Uptrend", BUY_COLOR),
+            ("Fair P/E Ratio", HOLD_COLOR),
+            ("Neutral Revenue Growth", HOLD_COLOR),
+            ("Positive Earnings Growth", BUY_COLOR),
+        ],
+
+        "HOLD-DOWNTREND-NEUTRAL-REVENUE": [
+            ("Downtrend", SELL_COLOR),
+            ("Neutral Revenue Growth", HOLD_COLOR),
+            ("Positive Earnings Growth", BUY_COLOR),
+        ],
+
+        "HOLD-DOWNTREND-POSITIVE-FUNDAMENTALS": [
+            ("Downtrend", SELL_COLOR),
+            ("Positive Revenue Growth", BUY_COLOR),
+            ("Positive Earnings Growth", BUY_COLOR),
+        ],
+
+        "HOLD-DOWNTREND-MIXED-FUNDAMENTALS": [
+            ("Downtrend", SELL_COLOR),
+            ("Positive Revenue Growth", BUY_COLOR),
+            ("Negative Earnings Growth", SELL_COLOR),
+        ],
+
+        "HOLD-UPTREND-LOW-VOLUME": [
+            ("Uptrend", BUY_COLOR),
+            ("Low P/E Ratio", BUY_COLOR),
+            ("Positive Revenue Growth", BUY_COLOR),
+            ("Positive Earnings Growth", BUY_COLOR),
+            ("Low Trading Volume", HOLD_COLOR),
+        ],
+
+        "SELL-DOWNTREND-NEGATIVE-FUNDAMENTALS": [
+            ("Downtrend", SELL_COLOR),
+            ("Negative Revenue Growth", SELL_COLOR),
+            ("Negative Earnings Growth", SELL_COLOR),
+        ],
+
+        "SELL-SIDEWAYS-NEGATIVE-EARNINGS": [
+            ("Sideways Trend", HOLD_COLOR),
+            ("Negative Earnings Growth", SELL_COLOR),
+        ],
+
+        "SELL-DOWNTREND-HIGH-PE": [
+            ("Downtrend", SELL_COLOR),
+            ("High P/E Ratio", SELL_COLOR),
+            ("Negative Revenue Growth", SELL_COLOR),
+            ("Positive Earnings Growth", BUY_COLOR),
+        ],
+
+        "SELL-DOWNTREND-NEGATIVE-EARNINGS": [
+            ("Downtrend", SELL_COLOR),
+            ("Neutral Revenue Growth", HOLD_COLOR),
+            ("Negative Earnings Growth", SELL_COLOR),
+        ],
+    }
+
+    reasons = reason_map.get(rule, [])
+
+    for reason, color in reasons:
+        create_label(
+            reasons_frame,
+            f"• {reason}",
+            color=color,
+            bg=GRAPH_COLOR,
+            justify="left"
+        ).pack(
+            anchor="w"
+        )
 
 def build_analysis(parent):
     panel = create_section(parent, "EXPERT SYSTEM ANALYSIS")
@@ -58,17 +170,11 @@ def build_analysis(parent):
         pady=(5, 3)
     )
 
-    reasons = create_label(
+    reasons_frame = tk.Frame(
         panel,
-        "• Uptrend\n"
-        "• Low P/E\n"
-        "• Positive Revenue\n"
-        "• Positive Earnings",
-        color=TEXT_COLOR,
-        bg=GRAPH_COLOR,
-        justify="left"
+        bg=GRAPH_COLOR
     )
-    reasons.pack(
+    reasons_frame.pack(
         anchor="w",
         padx=35
     )
@@ -78,5 +184,5 @@ def build_analysis(parent):
         "confidence": confidence,
         "recommendation": recommendation,
         "rule": rule,
-        "reasons": reasons
+        "reasons": reasons_frame
     }
