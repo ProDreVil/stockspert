@@ -1,4 +1,4 @@
-# TODO
+# Stockspert TODO
 
 ## 1. Core Expert System
 
@@ -29,6 +29,9 @@
 * [x] Revenue Growth dropdown
 * [x] Earnings Growth dropdown
 * [x] Trading Volume dropdown
+* [ ] Price Change display
+* [ ] Last Updated display
+* [x] Apply Market Changes button
 
 ### Simulation Status
 
@@ -36,7 +39,9 @@
 * [x] Time amount input
 * [x] Time unit dropdown
 * [x] NEXT button
-* [x] Random Market button
+* [x] RANDOM button
+* [x] Stack NEXT and RANDOM vertically
+* [x] Center NEXT and RANDOM buttons
 
 ### Portfolio
 
@@ -59,6 +64,7 @@
 
 * [x] Expert System Analysis section
 * [ ] Recommendation display
+* [ ] Confidence display
 * [ ] Rule Fired display
 * [ ] Reason / explanation display
 * [ ] BUY / HOLD / SELL visual indication
@@ -87,6 +93,7 @@ Portfolio Value =
 Available Cash + (Shares Owned × Stock Price)
 ```
 
+* [ ] Calculate price change in Python
 * [ ] Update portfolio value when stock price changes
 * [ ] Make transactions affect the expert system's portfolio facts
 
@@ -104,7 +111,7 @@ Available Cash + (Shares Owned × Stock Price)
 * [ ] Update price history
 * [ ] Run CLIPS after simulation advances
 * [ ] Update portfolio value
-* [ ] Implement Random Market
+* [ ] Implement RANDOM
 * [ ] Make random market scenarios reasonably coherent
 
 ---
@@ -118,6 +125,7 @@ Available Cash + (Shares Owned × Stock Price)
 * [ ] Test SELL recommendation
 * [ ] Test no matching rule
 * [ ] Test rule priority / overlapping rules
+* [ ] Test confidence calculation
 
 ### Portfolio
 
@@ -136,9 +144,10 @@ Available Cash + (Shares Owned × Stock Price)
 * [ ] Test month advancement
 * [ ] Test year advancement
 * [ ] Test stock price changes
+* [ ] Test price change calculation
 * [ ] Test graph updates
 * [ ] Test portfolio value updates
-* [ ] Test Random Market
+* [ ] Test RANDOM
 
 ---
 
