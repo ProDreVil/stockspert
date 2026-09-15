@@ -1,25 +1,82 @@
 import tkinter as tk
+
+from config import (
+    BUY_COLOR,
+    GRAPH_COLOR,
+    SECONDARY_TEXT,
+    TEXT_COLOR,
+)
+
 from gui.components import create_section, create_label
+
 
 def build_analysis(parent):
     panel = create_section(parent, "EXPERT SYSTEM ANALYSIS")
 
-    row = tk.Frame(panel, bg="#181818")
-    row.pack(fill="x", padx=15, pady=(10,5))
+    recommendation = create_label(
+        panel,
+        "BUY",
+        font=("Segoe UI", 24, "bold"),
+        color=BUY_COLOR,
+        bg=GRAPH_COLOR
+    )
+    recommendation.pack(
+        pady=(15, 12)
+    )
 
-    create_label(row, "Confidence", color="#AAAAAA", bg="#181818").pack(side="left")
-    create_label(row, "69%", font=("Segoe UI",10,"bold"), bg="#181818").pack(side="left", padx=(8,25))
-    create_label(row, "● BUY", font=("Segoe UI",12,"bold"), bg="#181818").pack(side="left")
+    info_row = tk.Frame(panel, bg=GRAPH_COLOR)
+    info_row.pack(
+        fill="x",
+        padx=20,
+        pady=(0, 10)
+    )
 
-    create_label(panel, "Rule Fired: BUY-UPTREND",
-                 color="#AAAAAA", bg="#181818").pack(anchor="w", padx=15)
+    confidence = create_label(
+        info_row,
+        "Confidence: 69%",
+        color=SECONDARY_TEXT,
+        bg=GRAPH_COLOR
+    )
+    confidence.pack(side="left")
 
-    create_label(panel,
-                 "Reasons: Uptrend • Low P/E • Positive Revenue",
-                 color="#AAAAAA", bg="#181818").pack(anchor="w", padx=15, pady=(10,2))
+    rule = create_label(
+        info_row,
+        "Rule Fired: BUY-UPTREND",
+        color=SECONDARY_TEXT,
+        bg=GRAPH_COLOR
+    )
+    rule.pack(side="right")
 
-    create_label(panel,
-                 "         • Positive Earnings",
-                 color="#AAAAAA", bg="#181818").pack(anchor="w", padx=15)
+    create_label(
+        panel,
+        "Reasons:",
+        color=SECONDARY_TEXT,
+        bg=GRAPH_COLOR
+    ).pack(
+        anchor="w",
+        padx=20,
+        pady=(5, 3)
+    )
 
-    return panel
+    reasons = create_label(
+        panel,
+        "• Uptrend\n"
+        "• Low P/E\n"
+        "• Positive Revenue\n"
+        "• Positive Earnings",
+        color=TEXT_COLOR,
+        bg=GRAPH_COLOR,
+        justify="left"
+    )
+    reasons.pack(
+        anchor="w",
+        padx=35
+    )
+
+    return {
+        "frame": panel,
+        "confidence": confidence,
+        "recommendation": recommendation,
+        "rule": rule,
+        "reasons": reasons
+    }

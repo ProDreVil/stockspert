@@ -1,7 +1,15 @@
 import tkinter as tk
 from clips import get_recommendation
 
-from config import BG_COLOR, START_MAXIMIZED, WINDOW_TITLE
+from config import (
+    BG_COLOR,
+    BUY_COLOR,
+    HOLD_COLOR,
+    SELL_COLOR,
+    START_MAXIMIZED,
+    TEXT_COLOR,
+    WINDOW_TITLE
+)
 from gui.header import build_header
 from gui.market import build_market
 from gui.portfolio import build_portfolio
@@ -28,7 +36,6 @@ class StockspertGUI:
         main = tk.Frame(self.root, bg=BG_COLOR)
         main.pack(fill="both", expand=True, padx=25, pady=(10, 20))
 
-        # 40 / 25 / 35 layout
         main.grid_columnconfigure(0, weight=40)
         main.grid_columnconfigure(1, weight=25)
         main.grid_columnconfigure(2, weight=35)
@@ -36,14 +43,12 @@ class StockspertGUI:
         main.grid_rowconfigure(0, weight=3)
         main.grid_rowconfigure(1, weight=1)
 
-        # Price History
         graph_panel = tk.Frame(main, bg=BG_COLOR)
         graph_panel.grid(row=0, column=0, sticky="nsew", padx=(0, 5))
 
         self.graph = StockGraph(graph_panel)
         self.graph.frame.pack(fill="both", expand=True)
 
-        # Top-right
         build_market(main, on_apply=self.apply_market_changes).grid(
             row=0, column=1,
             sticky="nsew", padx=5
@@ -54,16 +59,19 @@ class StockspertGUI:
             sticky="nsew", padx=(5, 0)
         )
 
-        # Bottom
         build_simulation(main).grid(
             row=1, column=0,
             sticky="nsew", padx=(0, 5), pady=(10, 0)
         )
 
-        build_analysis(main).grid(
-            row=1, column=1,
+        self.analysis = build_analysis(main)
+        self.analysis["frame"].grid(
+            row=1,
+            column=1,
             columnspan=2,
-            sticky="nsew", padx=(5, 0), pady=(10, 0)
+            sticky="nsew",
+            padx=(5, 0),
+            pady=(10, 0)
         )
 
     def apply_market_changes(
@@ -83,7 +91,23 @@ class StockspertGUI:
             volume.lower()
         )
 
-        print("Recommendation:", recommendation)
+        recommendation_colors = {
+            "BUY": BUY_COLOR,
+            "HOLD": HOLD_COLOR,
+            "SELL": SELL_COLOR
+        }
+
+        self.analysis["recommendation"].configure(
+            text=recommendation,
+            fg=recommendation_colors.get(
+                recommendation,
+                TEXT_COLOR
+            )
+        )
+
+        self.analysis["rule"].configure(
+            text=f"Rule Fired: {recommendation}"
+        )
 
     def run(self):
         self.root.mainloop()

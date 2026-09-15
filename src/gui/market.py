@@ -1,5 +1,6 @@
 import tkinter as tk
 
+from config import GRAPH_COLOR, SECONDARY_TEXT
 from gui.components import (
     create_button,
     create_dropdown,
@@ -29,14 +30,14 @@ def build_market(parent, on_apply=None):
     ]
 
     for label, variable, values in inputs:
-        row = tk.Frame(panel, bg="#181818")
+        row = tk.Frame(panel, bg=GRAPH_COLOR)
         row.pack(fill="x", padx=15, pady=2)
 
         create_label(
             row,
             label,
-            color="#AAAAAA",
-            bg="#181818"
+            color=SECONDARY_TEXT,
+            bg=GRAPH_COLOR
         ).pack(side="left")
 
         if values:
