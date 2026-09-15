@@ -7,10 +7,13 @@
         ├── clips-run.txt
         ├── stock-market-docu.md
     └── 📁src
+        └── 📁gui
+            ├── __init__.py
+            ├── components.py
+            ├── graph.py
+            ├── window.py
         ├── clips.py
-        ├── components.py
         ├── config.py
-        ├── gui.py
         ├── main.py
         ├── portfolio.py
         ├── simulation.py

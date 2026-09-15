@@ -1,4 +1,4 @@
-from gui import StockspertGUI
+from gui.window import StockspertGUI
 
 def main():
     app = StockspertGUI()
