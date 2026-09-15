@@ -1,7 +1,16 @@
 import tkinter as tk
-from gui.components import create_section, create_label, create_entry, create_button
+
+from config import GRAPH_COLOR, SECONDARY_TEXT
+from gui.components import (
+    create_button,
+    create_entry,
+    create_label,
+    create_section,
+)
+
 
 def build_portfolio(parent):
+
     panel = create_section(parent, "PORTFOLIO")
 
     stats = [
@@ -12,30 +21,99 @@ def build_portfolio(parent):
     ]
 
     for label, value in stats:
-        row = tk.Frame(panel, bg="#181818")
+        row = tk.Frame(panel, bg=GRAPH_COLOR)
         row.pack(fill="x", padx=15, pady=2)
 
-        create_label(row, label, color="#AAAAAA", bg="#181818").pack(side="left")
-        create_label(row, value, bg="#181818").pack(side="right")
+        create_label(
+            row,
+            label,
+            color=SECONDARY_TEXT,
+            bg=GRAPH_COLOR
+        ).pack(side="left")
 
-    create_label(panel, "P/L        $0.00",
-                 color="#AAAAAA", bg="#181818").pack(anchor="w", padx=15, pady=(12,2))
+        create_label(
+            row,
+            value,
+            bg=GRAPH_COLOR
+        ).pack(side="right")
 
-    create_label(panel, "Return     0.00%",
-                 color="#AAAAAA", bg="#181818").pack(anchor="w", padx=15)
+    create_label(
+        panel,
+        "P/L        $0.00",
+        color=SECONDARY_TEXT,
+        bg=GRAPH_COLOR
+    ).pack(
+        anchor="w",
+        padx=15,
+        pady=(12, 2)
+    )
 
-    buy = tk.Frame(panel, bg="#181818")
-    buy.pack(fill="x", padx=15, pady=(15,5))
+    create_label(
+        panel,
+        "Return     0.00%",
+        color=SECONDARY_TEXT,
+        bg=GRAPH_COLOR
+    ).pack(
+        anchor="w",
+        padx=15
+    )
 
-    create_label(buy, "Buy", bg="#181818").pack(side="left")
-    create_entry(buy, width=5).pack(side="left", padx=5)
-    create_button(buy, "BUY").pack(side="left")
+    buy = tk.Frame(
+        panel,
+        bg=GRAPH_COLOR
+    )
+    buy.pack(
+        fill="x",
+        padx=15,
+        pady=(15, 5)
+    )
 
-    sell = tk.Frame(panel, bg="#181818")
-    sell.pack(fill="x", padx=15, pady=(0,10))
+    create_label(
+        buy,
+        "Buy",
+        bg=GRAPH_COLOR
+    ).pack(side="left")
 
-    create_label(sell, "Sell", bg="#181818").pack(side="left")
-    create_entry(sell, width=5).pack(side="left", padx=5)
-    create_button(sell, "SELL").pack(side="left")
+    create_entry(
+        buy,
+        width=5
+    ).pack(
+        side="left",
+        padx=5
+    )
+
+    create_button(
+        buy,
+        "BUY"
+    ).pack(side="left")
+
+    sell = tk.Frame(
+        panel,
+        bg=GRAPH_COLOR
+    )
+    sell.pack(
+        fill="x",
+        padx=15,
+        pady=(0, 10)
+    )
+
+    create_label(
+        sell,
+        "Sell",
+        bg=GRAPH_COLOR
+    ).pack(side="left")
+
+    create_entry(
+        sell,
+        width=5
+    ).pack(
+        side="left",
+        padx=5
+    )
+
+    create_button(
+        sell,
+        "SELL"
+    ).pack(side="left")
 
     return panel

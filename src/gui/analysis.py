@@ -123,60 +123,97 @@ def update_reasons(reasons_frame, rule):
         )
 
 def build_analysis(parent):
-    panel = create_section(parent, "EXPERT SYSTEM ANALYSIS")
+
+    panel = create_section(
+        parent,
+        "EXPERT SYSTEM ANALYSIS"
+    )
+
+    content = tk.Frame(
+        panel,
+        bg=GRAPH_COLOR
+    )
+    content.pack(
+        fill="both",
+        expand=True,
+        padx=20,
+        pady=(5, 15)
+    )
+
+    left = tk.Frame(
+        content,
+        bg=GRAPH_COLOR,
+        width=250
+    )
+    left.pack(
+        side="left",
+        fill="y"
+    )
+    left.pack_propagate(False)
 
     recommendation = create_label(
-        panel,
+        left,
         "BUY",
         font=("Segoe UI", 24, "bold"),
         color=BUY_COLOR,
         bg=GRAPH_COLOR
     )
     recommendation.pack(
-        pady=(15, 12)
-    )
-
-    info_row = tk.Frame(panel, bg=GRAPH_COLOR)
-    info_row.pack(
-        fill="x",
-        padx=20,
-        pady=(0, 10)
+        anchor="w",
+        pady=(10, 15)
     )
 
     confidence = create_label(
-        info_row,
+        left,
         "Confidence: 69%",
         color=SECONDARY_TEXT,
         bg=GRAPH_COLOR
     )
-    confidence.pack(side="left")
+    confidence.pack(
+        anchor="w",
+        pady=2
+    )
 
     rule = create_label(
-        info_row,
-        "Rule Fired: BUY-UPTREND",
+        left,
+        "Rule Fired: BUY-UPTREND-LOW-PE",
         color=SECONDARY_TEXT,
+        bg=GRAPH_COLOR,
+        wraplength=180,
+        justify="left"
+    )
+    rule.pack(
+        anchor="w",
+        pady=2
+    )
+
+    right = tk.Frame(
+        content,
         bg=GRAPH_COLOR
     )
-    rule.pack(side="right")
+    right.pack(
+        side="left",
+        fill="both",
+        expand=True,
+        padx=(30, 0)
+    )
 
     create_label(
-        panel,
+        right,
         "Reasons:",
         color=SECONDARY_TEXT,
         bg=GRAPH_COLOR
     ).pack(
         anchor="w",
-        padx=20,
-        pady=(5, 3)
+        pady=(10, 8)
     )
 
     reasons_frame = tk.Frame(
-        panel,
+        right,
         bg=GRAPH_COLOR
     )
     reasons_frame.pack(
-        anchor="w",
-        padx=35
+        anchor="w"
     )
 
     return {

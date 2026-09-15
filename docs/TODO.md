@@ -65,114 +65,93 @@
 * [x] Expert System Analysis section
 * [x] Recommendation display
 * [ ] Confidence display
-* [ ] Rule Fired display
-* [ ] Reason / explanation display
+* [x] Rule Fired display
+* [x] Reason / explanation display
 * [x] BUY / HOLD / SELL visual indication
+* [x] Color-code reasons by meaning
+
+### GUI Polish
+
+* [x] Use config colors in portfolio
+* [x] Use config colors in simulation
+* [ ] Use config colors in remaining GUI files
+* [ ] Stabilize analysis layout for varying text lengths
 
 ---
 
 ## 3. Portfolio Simulation
 
-* [ ] Set starting cash to `$10,000`
-* [ ] Set starting shares to `0`
-* [ ] Implement buying
-
-  * [ ] Calculate `Stock Price × Quantity`
-  * [ ] Check available cash
-  * [ ] Deduct cash after successful purchase
-  * [ ] Add purchased shares
-* [ ] Implement selling
-
-  * [ ] Check shares owned
-  * [ ] Add sale proceeds to cash
-  * [ ] Remove sold shares
+* [ ] Starting cash: $10,000
+* [ ] Track shares owned
+* [ ] Track invested amount
 * [ ] Calculate portfolio value
-
-```text
-Portfolio Value = Available Cash + (Shares Owned × Stock Price)
-```
-
-* [ ] Calculate price change in Python
-* [ ] Update portfolio value when stock price changes
-* [ ] Make transactions affect the expert system's portfolio facts
+* [ ] Calculate profit / loss
+* [ ] Calculate return percentage
+* [ ] Buy stocks
+* [ ] Sell stocks
+* [ ] Prevent buying without sufficient cash
+* [ ] Prevent selling without sufficient shares
 
 ---
 
-## 4. Market Simulation
+## 4. Stock Simulation
 
-* [x] Start simulation at January 1, 2026
-* [ ] Implement Days
-* [ ] Implement Weeks
-* [ ] Implement Months
-* [ ] Implement Years
-* [ ] Advance simulated date with NEXT
-* [ ] Update stock price
+* [ ] Generate simulated stock prices
+* [ ] Advance simulation by selected time
+* [ ] Randomize market conditions
 * [ ] Update price history
-* [ ] Run CLIPS after simulation advances
-* [ ] Update portfolio value
-* [ ] Implement RANDOM
-* [ ] Make random market scenarios reasonably coherent
+* [ ] Update market indicators
+* [ ] Update simulated date
 
 ---
 
-## 5. Testing
+## Tomorrow's Plan
 
-### Expert System
+### During the day — Graph + Confidence
 
-* [ ] Test BUY recommendation
-* [ ] Test HOLD recommendation
-* [ ] Test SELL recommendation
-* [ ] Test no matching rule
-* [ ] Test rule priority / overlapping rules
-* [ ] Test confidence calculation
+**Priority 1: Finish the price history graph**
 
-### Portfolio
+* Make the graph properly display simulated prices
+* Connect it to the existing price history
+* Make sure it fits the current larger layout
+* Prepare it to update when the simulation advances
 
-* [ ] Test buying 1 share
-* [ ] Test buying multiple shares
-* [ ] Test insufficient cash
-* [ ] Test selling 1 share
-* [ ] Test selling multiple shares
-* [ ] Test selling with 0 shares
-* [ ] Test selling more shares than owned
+**Priority 2: Implement confidence**
 
-### Simulation
+* Decide how confidence is calculated from the fired rule
+* Replace the current placeholder `69%`
+* Display the calculated confidence in Expert System Analysis
 
-* [ ] Test day advancement
-* [ ] Test week advancement
-* [ ] Test month advancement
-* [ ] Test year advancement
-* [ ] Test stock price changes
-* [ ] Test price change calculation
-* [ ] Test graph updates
-* [ ] Test portfolio value updates
-* [ ] Test RANDOM
+### At night — Simulation
 
----
+**Priority 3: Simulate passing days**
 
-## 6. Final Polish
+* Implement simulated date advancement
+* Implement Days first
+* Update stock price when time advances
+* Update price history
+* Update market conditions
+* Re-run CLIPS after each simulation step
+* Update the GUI analysis
 
-* [ ] Check GUI layout
-* [ ] Check dark theme
-* [ ] Check button states
-* [ ] Check input validation
-* [ ] Check error messages
-* [ ] Check recommendation explanations
-* [ ] Remove unnecessary code/files
-* [ ] Test complete user flow
-* [ ] Update README
-* [ ] Final demo test
+**Then, if time allows:**
+
+* Weeks
+* Months
+* Years
+* Random Market
 
 ---
 
 ## Current Priority
 
-> Work from top to bottom. Don't polish until the core system works.
+> Get the simulator working before adding more polish.
 
-* [ ] **Priority 1:** Connect GUI → CLIPS
-* [ ] **Priority 2:** Make recommendations work correctly
-* [ ] **Priority 3:** Integrate portfolio rules
-* [ ] **Priority 4:** Finish buy/sell simulation
-* [ ] **Priority 5:** Finish market simulation
-* [ ] **Priority 6:** Test everything
-* [ ] **Priority 7:** Polish and document
+* [x] **Priority 1:** Connect GUI → CLIPS
+* [x] **Priority 2:** Make recommendations work correctly
+* [ ] **Priority 3:** Finish graph + confidence
+* [ ] **Priority 4:** Integrate portfolio rules
+* [ ] **Priority 5:** Finish day-based market simulation
+* [ ] **Priority 6:** Add longer time units + Random Market
+* [ ] **Priority 7:** Test everything
+* [ ] **Priority 8:** Polish and document

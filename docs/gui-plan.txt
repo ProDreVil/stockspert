@@ -21,15 +21,13 @@
 │  ┌──────────────────────────────┐  ┌──────────────────────────────────────────────────────┐  │
 │  │ SIMULATION                   │  │ EXPERT SYSTEM ANALYSIS                               │  │
 │  │                              │  │                                                      │  │
-│  │                              │  │                        BUY                           │  │
-│  │  Advance [ 1 ] [ Day ▼ ]     │  │                                                      │  │
-│  │                              │  │ Confidence: 69%        Rule Fired: BUY-UPTREND       │  │
-│  │          [ NEXT ]            │  │                                                      │  │
-│  │         [ RANDOM ]           │  │ Reasons:                                             │  │
-│  │                              │  │   • Uptrend                                          │  │
-│  │                              │  │   • Low P/E                                          │  │
-│  │                              │  │   • Positive Revenue                                 │  │
-│  │                              │  │   • Positive Earnings                                │  │
+│  │                              │  │  BUY                    Reasons:                     │  │
+│  │                              │  │                                                      │  │
+│  │  Advance [ 1 ] [ Day ▼ ]     │  │  Confidence: 69%        • Uptrend                    │  │
+│  │                              │  │  Rule Fired: BUY-       • Low P/E Ratio              │  │
+│  │          [ NEXT ]            │  │  UPTREND-LOW-PE         • Positive Revenue Growth    │  │
+│  │         [ RANDOM ]           │  │                         • Positive Earnings Growth   │  │
+│  │                              │  │                                                      │  │
 │  └──────────────────────────────┘  └──────────────────────────────────────────────────────┘  │
 │                                                                                              │
 └──────────────────────────────────────────────────────────────────────────────────────────────┘
