@@ -30,6 +30,7 @@
       (pe low)
       (revenue positive)
       (earnings positive))
+   (not (recommendation))
    =>
    (assert (recommendation (action buy)))
    (printout t crlf
@@ -49,6 +50,7 @@
       (pe fair)
       (revenue positive)
       (earnings positive))
+   (not (recommendation))
    =>
    (assert (recommendation (action buy)))
    (printout t crlf
@@ -63,12 +65,14 @@
       "==================================" crlf))
 
 (defrule buy-stock-high-volume
+   (declare (salience 10))
    (stock
       (trend uptrend)
       (pe low)
       (revenue positive)
       (earnings positive)
       (volume high))
+   (not (recommendation))
    =>
    (assert (recommendation (action buy)))
    (printout t crlf
@@ -86,6 +90,7 @@
    (stock
       (trend sideways)
       (earnings positive))
+   (not (recommendation))
    =>
    (assert (recommendation (action hold)))
    (printout t crlf
@@ -104,6 +109,7 @@
       (pe low)
       (revenue neutral)
       (earnings positive))
+   (not (recommendation))
    =>
    (assert (recommendation (action hold)))
    (printout t crlf
@@ -123,6 +129,7 @@
       (pe fair)
       (revenue neutral)
       (earnings positive))
+   (not (recommendation))
    =>
    (assert (recommendation (action hold)))
    (printout t crlf
@@ -141,6 +148,7 @@
       (trend downtrend)
       (revenue neutral)
       (earnings positive))
+   (not (recommendation))
    =>
    (assert (recommendation (action hold)))
    (printout t crlf
@@ -159,6 +167,7 @@
       (trend downtrend)
       (revenue positive)
       (earnings positive))
+   (not (recommendation))
    =>
    (assert (recommendation (action hold)))
    (printout t crlf
@@ -176,6 +185,7 @@
       (trend downtrend)
       (revenue positive)
       (earnings negative))
+   (not (recommendation))
    =>
    (assert (recommendation (action hold)))
    (printout t crlf
@@ -189,12 +199,14 @@
       "==================================" crlf))
 
 (defrule hold-stock-low-volume
+   (declare (salience 10))
    (stock
       (trend uptrend)
       (pe low)
       (revenue positive)
       (earnings positive)
       (volume low))
+   (not (recommendation))
    =>
    (assert (recommendation (action hold)))
    (printout t crlf
@@ -214,6 +226,7 @@
       (trend downtrend)
       (revenue negative)
       (earnings negative))
+   (not (recommendation))
    =>
    (assert (recommendation (action sell)))
    (printout t crlf
@@ -230,6 +243,7 @@
    (stock
       (trend sideways)
       (earnings negative))
+   (not (recommendation))
    =>
    (assert (recommendation (action sell)))
    (printout t crlf
@@ -248,6 +262,7 @@
       (pe high)
       (revenue negative)
       (earnings positive))
+   (not (recommendation))
    =>
    (assert (recommendation (action sell)))
    (printout t crlf
@@ -266,6 +281,7 @@
       (trend downtrend)
       (revenue neutral)
       (earnings negative))
+   (not (recommendation))
    =>
    (assert (recommendation (action sell)))
    (printout t crlf
