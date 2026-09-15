@@ -44,3 +44,4 @@ def get_recommendation(trend, pe, revenue, earnings, volume):
         return "N/A"
 
     return "ERROR"
+    

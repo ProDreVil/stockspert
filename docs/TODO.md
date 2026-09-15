@@ -6,7 +6,7 @@
 * [x] Connect GUI to CLIPS
 * [x] Connect GUI market inputs to CLIPS facts
 * [x] Make existing CLIPS rules work with the GUI
-* [ ] Fix rule overlap / recommendation priority
+* [x] Fix rule overlap / recommendation priority
 * [ ] Add portfolio facts to CLIPS
 
   * [ ] Available Cash
@@ -63,11 +63,11 @@
 ### Expert System Analysis
 
 * [x] Expert System Analysis section
-* [ ] Recommendation display
+* [x] Recommendation display
 * [ ] Confidence display
 * [ ] Rule Fired display
 * [ ] Reason / explanation display
-* [ ] BUY / HOLD / SELL visual indication
+* [x] BUY / HOLD / SELL visual indication
 
 ---
 
@@ -89,8 +89,7 @@
 * [ ] Calculate portfolio value
 
 ```text
-Portfolio Value =
-Available Cash + (Shares Owned × Stock Price)
+Portfolio Value = Available Cash + (Shares Owned × Stock Price)
 ```
 
 * [ ] Calculate price change in Python

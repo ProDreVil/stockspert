@@ -1,8 +1,8 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Stock Market Investment Expert System
 ;; Intelligent Systems - CLIPS
 ;; Inference: Forward Chaining
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; ==========================================
 ;; KNOWLEDGE BASE
@@ -18,298 +18,373 @@
 (deftemplate recommendation
    (slot action))
 
+
 ;; ==========================================
-;; RULES
+;; OUTPUT FUNCTION
 ;; ==========================================
 
-;; ----- Buy -----
+(deffunction report-recommendation (?action ?rule $?reasons)
+
+   (printout t crlf
+      "RECOMMENDATION: " ?action crlf
+      "RULE: " ?rule crlf)
+
+   (foreach ?reason ?reasons
+      (printout t "REASON: " ?reason crlf))
+
+   (printout t "END RESULT" crlf))
+
+
+;; ==========================================
+;; BUY RULES
+;; ==========================================
 
 (defrule buy-stock
+
    (stock
       (trend uptrend)
       (pe low)
       (revenue positive)
       (earnings positive))
+
    (not (recommendation))
+
    =>
+
    (assert (recommendation (action buy)))
-   (printout t crlf
-      "==================================" crlf
-      " RECOMMENDATION: BUY" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- Stock is in an Uptrend" crlf
-      "- Low P/E Ratio (Undervalued)" crlf
-      "- Positive Revenue Growth" crlf
-      "- Positive Earnings Growth" crlf
-      "==================================" crlf))
+
+   (report-recommendation
+      "BUY"
+      "BUY-UPTREND-LOW-PE"
+      "Uptrend"
+      "Low P/E Ratio"
+      "Positive Revenue Growth"
+      "Positive Earnings Growth"))
+
 
 (defrule buy-stock-fair-pe
+
    (stock
       (trend uptrend)
       (pe fair)
       (revenue positive)
       (earnings positive))
+
    (not (recommendation))
+
    =>
+
    (assert (recommendation (action buy)))
-   (printout t crlf
-      "==================================" crlf
-      " RECOMMENDATION: BUY" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- Stock is in an Uptrend" crlf
-      "- Fair P/E Ratio" crlf
-      "- Positive Revenue Growth" crlf
-      "- Positive Earnings Growth" crlf
-      "==================================" crlf))
+
+   (report-recommendation
+      "BUY"
+      "BUY-UPTREND-FAIR-PE"
+      "Uptrend"
+      "Fair P/E Ratio"
+      "Positive Revenue Growth"
+      "Positive Earnings Growth"))
+
 
 (defrule buy-stock-high-volume
+
    (declare (salience 10))
+
    (stock
       (trend uptrend)
       (pe low)
       (revenue positive)
       (earnings positive)
       (volume high))
-   (not (recommendation))
-   =>
-   (assert (recommendation (action buy)))
-   (printout t crlf
-      "==================================" crlf
-      " RECOMMENDATION: BUY" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- Uptrend is supported by High Trading Volume" crlf
-      "- Strong investor interest confirms the trend" crlf
-      "==================================" crlf))
 
-;; ----- Hold -----
+   (not (recommendation))
+
+   =>
+
+   (assert (recommendation (action buy)))
+
+   (report-recommendation
+      "BUY"
+      "BUY-UPTREND-HIGH-VOLUME"
+      "Uptrend"
+      "Low P/E Ratio"
+      "Positive Revenue Growth"
+      "Positive Earnings Growth"
+      "High trading volume supports the upward trend"))
+
+
+;; ==========================================
+;; HOLD RULES
+;; ==========================================
 
 (defrule hold-stock
+
    (stock
       (trend sideways)
       (earnings positive))
+
    (not (recommendation))
+
    =>
+
    (assert (recommendation (action hold)))
-   (printout t crlf
-      "==================================" crlf
-      " RECOMMENDATION: HOLD" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- Market is moving sideways" crlf
-      "- Company still has positive earnings" crlf
-      "- Wait for stronger confirmation" crlf
-      "==================================" crlf))
+
+   (report-recommendation
+      "HOLD"
+      "HOLD-SIDEWAYS-POSITIVE-EARNINGS"
+      "Sideways market movement"
+      "Positive Earnings Growth"
+      "Wait for stronger market confirmation"))
+
 
 (defrule hold-stock-neutral-revenue
+
    (stock
       (trend uptrend)
       (pe low)
       (revenue neutral)
       (earnings positive))
+
    (not (recommendation))
+
    =>
+
    (assert (recommendation (action hold)))
-   (printout t crlf
-      "==================================" crlf
-      " RECOMMENDATION: HOLD" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- Stock is in an Uptrend" crlf
-      "- Low P/E Ratio" crlf
-      "- Revenue Growth is Neutral" crlf
-      "- Earnings Growth is Positive" crlf
-      "==================================" crlf))
+
+   (report-recommendation
+      "HOLD"
+      "HOLD-UPTREND-NEUTRAL-REVENUE"
+      "Uptrend"
+      "Low P/E Ratio"
+      "Neutral Revenue Growth"
+      "Positive Earnings Growth"))
+
 
 (defrule hold-stock-fair-neutral
+
    (stock
       (trend uptrend)
       (pe fair)
       (revenue neutral)
       (earnings positive))
+
    (not (recommendation))
+
    =>
+
    (assert (recommendation (action hold)))
-   (printout t crlf
-      "==================================" crlf
-      " RECOMMENDATION: HOLD" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- Stock is in an Uptrend" crlf
-      "- Fair P/E Ratio" crlf
-      "- Revenue Growth is Neutral" crlf
-      "- Positive Earnings Growth" crlf
-      "==================================" crlf))
+
+   (report-recommendation
+      "HOLD"
+      "HOLD-UPTREND-FAIR-PE-NEUTRAL-REVENUE"
+      "Uptrend"
+      "Fair P/E Ratio"
+      "Neutral Revenue Growth"
+      "Positive Earnings Growth"))
+
 
 (defrule hold-stock-downtrend
+
    (stock
       (trend downtrend)
       (revenue neutral)
       (earnings positive))
+
    (not (recommendation))
+
    =>
+
    (assert (recommendation (action hold)))
-   (printout t crlf
-      "==================================" crlf
-      " RECOMMENDATION: HOLD" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- Market is in a Downtrend" crlf
-      "- Revenue Growth is Neutral" crlf
-      "- Earnings remain Positive" crlf
-      "- Wait for further confirmation" crlf
-      "==================================" crlf))
+
+   (report-recommendation
+      "HOLD"
+      "HOLD-DOWNTREND-NEUTRAL-REVENUE"
+      "Downtrend"
+      "Neutral Revenue Growth"
+      "Positive Earnings Growth"
+      "Wait for further confirmation"))
+
 
 (defrule hold-stock-downtrend-positive
+
    (stock
       (trend downtrend)
       (revenue positive)
       (earnings positive))
+
    (not (recommendation))
+
    =>
+
    (assert (recommendation (action hold)))
-   (printout t crlf
-      "==================================" crlf
-      " RECOMMENDATION: HOLD" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- Market is in a Downtrend" crlf
-      "- Revenue and Earnings remain Positive" crlf
-      "- Company fundamentals are still strong" crlf
-      "==================================" crlf))
+
+   (report-recommendation
+      "HOLD"
+      "HOLD-DOWNTREND-POSITIVE-FUNDAMENTALS"
+      "Downtrend"
+      "Positive Revenue Growth"
+      "Positive Earnings Growth"
+      "Positive fundamentals provide support despite the downtrend"))
+
 
 (defrule hold-stock-downtrend-mixed
+
    (stock
       (trend downtrend)
       (revenue positive)
       (earnings negative))
+
    (not (recommendation))
+
    =>
+
    (assert (recommendation (action hold)))
-   (printout t crlf
-      "==================================" crlf
-      " RECOMMENDATION: HOLD" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- Revenue remains Positive" crlf
-      "- Earnings are Negative" crlf
-      "- Indicators are mixed; monitor closely" crlf
-      "==================================" crlf))
+
+   (report-recommendation
+      "HOLD"
+      "HOLD-DOWNTREND-MIXED-FUNDAMENTALS"
+      "Downtrend"
+      "Positive Revenue Growth"
+      "Negative Earnings Growth"
+      "Mixed fundamentals require close monitoring"))
+
 
 (defrule hold-stock-low-volume
+
    (declare (salience 10))
+
    (stock
       (trend uptrend)
       (pe low)
       (revenue positive)
       (earnings positive)
       (volume low))
-   (not (recommendation))
-   =>
-   (assert (recommendation (action hold)))
-   (printout t crlf
-      "==================================" crlf
-      " RECOMMENDATION: HOLD" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- Fundamentals are strong" crlf
-      "- Low Trading Volume weakens confidence" crlf
-      "- Wait for stronger market participation" crlf
-      "==================================" crlf))
 
-;; ----- Sell -----
+   (not (recommendation))
+
+   =>
+
+   (assert (recommendation (action hold)))
+
+   (report-recommendation
+      "HOLD"
+      "HOLD-UPTREND-LOW-VOLUME"
+      "Uptrend"
+      "Low P/E Ratio"
+      "Positive Revenue Growth"
+      "Positive Earnings Growth"
+      "Low trading volume reduces confirmation of the upward trend"))
+
+
+;; ==========================================
+;; SELL RULES
+;; ==========================================
 
 (defrule sell-stock
+
    (stock
       (trend downtrend)
       (revenue negative)
       (earnings negative))
+
    (not (recommendation))
+
    =>
+
    (assert (recommendation (action sell)))
-   (printout t crlf
-      "==================================" crlf
-      " RECOMMENDATION: SELL" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- Stock is in a Downtrend" crlf
-      "- Negative Revenue Growth" crlf
-      "- Negative Earnings Growth" crlf
-      "==================================" crlf))
+
+   (report-recommendation
+      "SELL"
+      "SELL-DOWNTREND-NEGATIVE-FUNDAMENTALS"
+      "Downtrend"
+      "Negative Revenue Growth"
+      "Negative Earnings Growth"))
+
 
 (defrule sell-stock-sideways
+
    (stock
       (trend sideways)
       (earnings negative))
+
    (not (recommendation))
+
    =>
+
    (assert (recommendation (action sell)))
-   (printout t crlf
-      "==================================" crlf
-      " RECOMMENDATION: SELL" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- Stock is moving sideways" crlf
-      "- Earnings Growth is Negative" crlf
-      "- Company performance is weakening" crlf
-      "==================================" crlf))
+
+   (report-recommendation
+      "SELL"
+      "SELL-SIDEWAYS-NEGATIVE-EARNINGS"
+      "Sideways market movement"
+      "Negative Earnings Growth"
+      "Negative earnings indicate weakening company performance"))
+
 
 (defrule sell-stock-overvalued
+
    (stock
       (trend downtrend)
       (pe high)
       (revenue negative)
       (earnings positive))
+
    (not (recommendation))
+
    =>
+
    (assert (recommendation (action sell)))
-   (printout t crlf
-      "==================================" crlf
-      " RECOMMENDATION: SELL" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- Stock is in a Downtrend" crlf
-      "- High P/E Ratio" crlf
-      "- Negative Revenue Growth" crlf
-      "- Stock appears overvalued" crlf
-      "==================================" crlf))
+
+   (report-recommendation
+      "SELL"
+      "SELL-DOWNTREND-HIGH-PE"
+      "Downtrend"
+      "High P/E Ratio"
+      "Negative Revenue Growth"
+      "Positive Earnings Growth"
+      "High valuation combined with a weakening trend increases risk"))
+
 
 (defrule sell-stock-downtrend-neutral
+
    (stock
       (trend downtrend)
       (revenue neutral)
       (earnings negative))
-   (not (recommendation))
-   =>
-   (assert (recommendation (action sell)))
-   (printout t crlf
-      "==================================" crlf
-      " RECOMMENDATION: SELL" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- Market is in a Downtrend" crlf
-      "- Earnings Growth is Negative" crlf
-      "- Financial performance is weakening" crlf
-      "==================================" crlf))
 
-;; ----- N/A -----
+   (not (recommendation))
+
+   =>
+
+   (assert (recommendation (action sell)))
+
+   (report-recommendation
+      "SELL"
+      "SELL-DOWNTREND-NEGATIVE-EARNINGS"
+      "Downtrend"
+      "Neutral Revenue Growth"
+      "Negative Earnings Growth"
+      "Negative earnings indicate weakening financial performance"))
+
+
+;; ==========================================
+;; NO CLEAR RECOMMENDATION
+;; ==========================================
 
 (defrule no-clear-recommendation
+
    (stock)
+
    (not (recommendation))
+
    =>
+
    (printout t crlf
-      "==================================" crlf
-      " NO CLEAR RECOMMENDATION" crlf
-      "----------------------------------" crlf
-      "Reason:" crlf
-      "- The current indicators do not" crlf
-      "  strongly support BUY, HOLD, or SELL." crlf
-      "- More information or confirmation" crlf
-      "  is recommended." crlf
-      "==================================" crlf))
+      "RECOMMENDATION: N/A" crlf
+      "RULE: NO-CLEAR-RECOMMENDATION" crlf
+      "REASON: Current indicators do not strongly support BUY, HOLD, or SELL." crlf
+      "REASON: Additional information or market confirmation is recommended." crlf
+      "END RESULT" crlf))
+
 
 ;; ==========================================
 ;; USER INPUT FUNCTION
@@ -322,19 +397,29 @@
       " STOCK MARKET EXPERT SYSTEM" crlf
       "==================================" crlf crlf)
 
-   (printout t "Stock Trend (uptrend/sideways/downtrend): ")
+   (printout t
+      "Stock Trend (uptrend/sideways/downtrend): ")
+
    (bind ?trend (read))
 
-   (printout t "P/E Ratio (low/fair/high): ")
+   (printout t
+      "P/E Ratio (low/fair/high): ")
+
    (bind ?pe (read))
 
-   (printout t "Revenue Growth (positive/neutral/negative): ")
+   (printout t
+      "Revenue Growth (positive/neutral/negative): ")
+
    (bind ?revenue (read))
 
-   (printout t "Earnings Growth (positive/negative): ")
+   (printout t
+      "Earnings Growth (positive/negative): ")
+
    (bind ?earnings (read))
 
-   (printout t "Trading Volume (low/average/high): ")
+   (printout t
+      "Trading Volume (low/average/high): ")
+
    (bind ?volume (read))
 
    (assert
@@ -344,4 +429,5 @@
          (revenue ?revenue)
          (earnings ?earnings)
          (volume ?volume)))
+
    (run))

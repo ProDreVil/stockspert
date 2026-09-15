@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from config import GRAPH_COLOR
+from config import GRAPH_COLOR, ACCENT_COLOR
 
 
 class StockGraph:
@@ -51,6 +51,6 @@ class StockGraph:
 
         self.canvas.create_line(
             *points,
-            fill="#4A90E2",
+            fill=ACCENT_COLOR,
             width=2
         )
