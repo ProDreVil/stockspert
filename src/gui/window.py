@@ -1,7 +1,7 @@
 from py_compile import main
 import tkinter as tk
-from clips import get_recommendation
 
+from clips import get_recommendation
 from config import (
     BG_COLOR,
     BUY_COLOR,
@@ -15,6 +15,7 @@ from gui.header import build_header
 from gui.market import build_market
 from gui.portfolio import build_portfolio
 from gui.simulation import build_simulation
+from market import Market
 from gui.analysis import (
     build_analysis,
     update_reasons,
@@ -30,7 +31,8 @@ class StockspertGUI:
 
         if START_MAXIMIZED:
             self.root.state("zoomed")
-
+        
+        self.market = Market(starting_price=100.00)
         self.build_ui()
         self.initialize_analysis()
 
@@ -64,7 +66,7 @@ class StockspertGUI:
             sticky="nsew", padx=(5, 0)
         )
 
-        build_simulation(main).grid(
+        build_simulation(main, on_next=self.advance_simulation).grid(
             row=1, column=0,
             sticky="nsew", padx=(0, 5), pady=(10, 0)
         )
@@ -127,6 +129,13 @@ class StockspertGUI:
             "Positive",
             "Positive",
             "Average",
+        )
+
+    def advance_simulation(self):
+        self.market.advance()
+
+        self.graph.update(
+            self.market.price_history
         )
 
     def run(self):

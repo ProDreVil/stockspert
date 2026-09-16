@@ -10,7 +10,7 @@ from gui.components import (
 )
 
 
-def build_simulation(parent):
+def build_simulation(parent, on_next=None):
 
     panel = create_section(parent, "SIMULATION")
 
@@ -18,6 +18,7 @@ def build_simulation(parent):
         panel,
         bg=GRAPH_COLOR
     )
+
     top.pack(
         padx=15,
         pady=(10, 15)
@@ -46,6 +47,7 @@ def build_simulation(parent):
     create_button(
         panel,
         "NEXT",
+        command=on_next,
         width=14
     ).pack(pady=(5, 8))
 
