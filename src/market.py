@@ -5,6 +5,8 @@ class Market:
     def __init__(self, starting_price=100.00):
         self.current_price = starting_price
         self.candles = []
+        for _ in range(7):
+            self.advance()
 
     @property
     def price_history(self):

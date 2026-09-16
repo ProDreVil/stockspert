@@ -34,6 +34,7 @@ class StockspertGUI:
         
         self.market = Market(starting_price=100.00)
         self.build_ui()
+        self.graph.update(self.market.candles)
         self.initialize_analysis()
 
     def build_ui(self):
@@ -133,10 +134,7 @@ class StockspertGUI:
 
     def advance_simulation(self):
         self.market.advance()
-
-        self.graph.update(
-            self.market.price_history
-        )
+        self.graph.update(self.market.candles)
 
     def run(self):
         self.root.mainloop()
