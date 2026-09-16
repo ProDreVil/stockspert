@@ -49,7 +49,7 @@ class StockspertGUI:
         main.grid_columnconfigure(2, weight=35)
 
         main.grid_rowconfigure(0, weight=2)
-        main.grid_rowconfigure(1, weight=1)
+        main.grid_rowconfigure(1, weight=1, minsize=180)
 
         graph_panel = tk.Frame(main, bg=BG_COLOR)
         graph_panel.grid(row=0, column=0, sticky="nsew", padx=(0, 5))
@@ -98,8 +98,6 @@ class StockspertGUI:
             earnings.lower(),
             volume.lower()
         )
-
-        print("CONFIDENCE:", confidence)
 
         recommendation_colors = {
             "BUY": BUY_COLOR,

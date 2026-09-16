@@ -143,7 +143,7 @@ def build_analysis(parent):
     left = tk.Frame(
         content,
         bg=GRAPH_COLOR,
-        width=250
+        width=380
     )
     left.pack(
         side="left",
@@ -179,8 +179,6 @@ def build_analysis(parent):
         "Rule Fired: BUY-UPTREND-LOW-PE",
         color=SECONDARY_TEXT,
         bg=GRAPH_COLOR,
-        wraplength=180,
-        justify="left"
     )
     rule.pack(
         anchor="w",
@@ -195,7 +193,7 @@ def build_analysis(parent):
         side="left",
         fill="both",
         expand=True,
-        padx=(30, 0)
+        padx=(50, 0)
     )
 
     create_label(
@@ -213,7 +211,9 @@ def build_analysis(parent):
         bg=GRAPH_COLOR
     )
     reasons_frame.pack(
-        anchor="w"
+        anchor="w",
+        fill="both",
+        expand=True
     )
 
     return {
