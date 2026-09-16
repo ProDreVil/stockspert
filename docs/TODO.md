@@ -96,7 +96,7 @@
 
 ## 4. Stock Simulation
 
-* [ ] Generate simulated stock prices
+* [x] Generate simulated stock prices
 * [ ] Advance simulation by selected time
 * [ ] Randomize market conditions
 * [ ] Update price history
@@ -105,41 +105,51 @@
 
 ---
 
-## Tomorrow's Plan
+## 5. Testing
 
-### During the day — Graph + Confidence
+### Expert System
 
-**Priority 1: Finish the price history graph**
+* [ ] Test BUY recommendation
+* [ ] Test HOLD recommendation
+* [ ] Test SELL recommendation
+* [ ] Test no matching rule
+* [ ] Test rule priority / overlapping rules
 
-* Make the graph properly display simulated prices
-* Connect it to the existing price history
-* Make sure it fits the current larger layout
-* Prepare it to update when the simulation advances
+### Portfolio
 
-**Priority 2: Implement confidence**
+* [ ] Test buying 1 share
+* [ ] Test buying multiple shares
+* [ ] Test insufficient cash
+* [ ] Test selling 1 share
+* [ ] Test selling multiple shares
+* [ ] Test selling with 0 shares
+* [ ] Test selling more shares than owned
 
-* Decide how confidence is calculated from the fired rule
-* Replace the current placeholder `69%`
-* Display the calculated confidence in Expert System Analysis
+### Simulation
 
-### At night — Simulation
+* [ ] Test day advancement
+* [ ] Test week advancement
+* [ ] Test month advancement
+* [ ] Test year advancement
+* [ ] Test stock price changes
+* [ ] Test graph updates
+* [ ] Test portfolio value updates
+* [ ] Test Random Market
 
-**Priority 3: Simulate passing days**
+---
 
-* Implement simulated date advancement
-* Implement Days first
-* Update stock price when time advances
-* Update price history
-* Update market conditions
-* Re-run CLIPS after each simulation step
-* Update the GUI analysis
+## 6. Final Polish
 
-**Then, if time allows:**
-
-* Weeks
-* Months
-* Years
-* Random Market
+* [ ] Check GUI layout
+* [ ] Check dark theme
+* [ ] Check button states
+* [ ] Check input validation
+* [ ] Check error messages
+* [ ] Check recommendation explanations
+* [ ] Remove unnecessary code/files
+* [ ] Test complete user flow
+* [ ] Update README
+* [ ] Final demo test
 
 ---
 

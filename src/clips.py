@@ -2,6 +2,8 @@ import re
 import subprocess
 from pathlib import Path
 
+from confidence import get_base_confidence
+
 CLIPS_EXE = r"C:\Program Files\CLIPS 6.31\CLIPSDOS64.exe"
 CLIPS_FILE = Path(__file__).resolve().parent.parent / "clips" / "main.CLP"
 
@@ -65,10 +67,10 @@ def get_recommendation(
     if recommendation_match:
         recommendation = recommendation_match.group(1).upper()
         rule = rule_match.group(1).strip() if rule_match else "UNKNOWN"
-
-        return recommendation, rule
+        confidence = get_base_confidence(rule)
+        return recommendation, rule, confidence
 
     if "RECOMMENDATION: N/A" in output:
-        return "N/A", "NO-CLEAR-RECOMMENDATION"
+        return "N/A", "NO-CLEAR-RECOMMENDATION", 0
 
     return "ERROR", "ERROR"

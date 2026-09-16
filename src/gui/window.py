@@ -91,13 +91,15 @@ class StockspertGUI:
         earnings,
         volume
     ):
-        recommendation, rule = get_recommendation(
+        recommendation, rule, confidence = get_recommendation(
             trend.lower(),
             pe.lower(),
             revenue.lower(),
             earnings.lower(),
             volume.lower()
         )
+
+        print("CONFIDENCE:", confidence)
 
         recommendation_colors = {
             "BUY": BUY_COLOR,
@@ -111,6 +113,10 @@ class StockspertGUI:
                 recommendation,
                 TEXT_COLOR
             )
+        )
+
+        self.analysis["confidence"].configure(
+            text=f"Confidence: {confidence}%"
         )
 
         self.analysis["rule"].configure(
