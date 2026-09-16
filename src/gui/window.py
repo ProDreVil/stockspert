@@ -1,3 +1,4 @@
+from py_compile import main
 import tkinter as tk
 from clips import get_recommendation
 
@@ -31,6 +32,7 @@ class StockspertGUI:
             self.root.state("zoomed")
 
         self.build_ui()
+        self.initialize_analysis()
 
     def build_ui(self):
         header = build_header(self.root, "January 1, 2026")
@@ -43,7 +45,7 @@ class StockspertGUI:
         main.grid_columnconfigure(1, weight=25)
         main.grid_columnconfigure(2, weight=35)
 
-        main.grid_rowconfigure(0, weight=3)
+        main.grid_rowconfigure(0, weight=2)
         main.grid_rowconfigure(1, weight=1)
 
         graph_panel = tk.Frame(main, bg=BG_COLOR)
@@ -115,6 +117,16 @@ class StockspertGUI:
         update_reasons(
             self.analysis["reasons"],
             rule
+        )
+
+    def initialize_analysis(self):
+        self.apply_market_changes(
+            "100.00",
+            "Uptrend",
+            "Low",
+            "Positive",
+            "Positive",
+            "Average",
         )
 
     def run(self):

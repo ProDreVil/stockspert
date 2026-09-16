@@ -6,6 +6,7 @@ from config import (
     PANEL_COLOR,
     SECONDARY_TEXT,
     TEXT_COLOR,
+    BORDER_COLOR,
 )
 
 
@@ -32,7 +33,12 @@ def create_panel(parent, bg=PANEL_COLOR):
 
 
 def create_section(parent, title):
-    section = tk.Frame(parent, bg=GRAPH_COLOR)
+    section = tk.Frame(
+        parent,
+        bg=GRAPH_COLOR,
+        highlightbackground=BORDER_COLOR,
+        highlightthickness=2
+    )
 
     create_label(
         section,
