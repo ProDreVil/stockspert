@@ -208,13 +208,14 @@ def build_analysis(parent):
 
     reasons_frame = tk.Frame(
         right,
-        bg=GRAPH_COLOR
+        bg=GRAPH_COLOR,
+        height=120
     )
     reasons_frame.pack(
         anchor="w",
-        fill="both",
-        expand=True
+        fill="x"
     )
+    reasons_frame.pack_propagate(False)
 
     return {
         "frame": panel,
