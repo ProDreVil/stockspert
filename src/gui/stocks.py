@@ -29,6 +29,24 @@ def build_market(parent, on_apply=None):
         ("Volume", volume_var, ["Low", "Average", "High"]),
     ]
 
+    def apply_changes(*args):
+        if on_apply:
+            on_apply(
+                price_var.get(),
+                trend_var.get(),
+                pe_var.get(),
+                revenue_var.get(),
+                earnings_var.get(),
+                volume_var.get()
+            )
+
+    price_var.trace_add("write", apply_changes)
+    trend_var.trace_add("write", apply_changes)
+    pe_var.trace_add("write", apply_changes)
+    revenue_var.trace_add("write", apply_changes)
+    earnings_var.trace_add("write", apply_changes)
+    volume_var.trace_add("write", apply_changes)
+
     for label, variable, values in inputs:
         row = tk.Frame(panel, bg=GRAPH_COLOR)
         row.pack(fill="x", padx=15, pady=2)
@@ -52,22 +70,5 @@ def build_market(parent, on_apply=None):
                 variable=variable,
                 width=12
             ).pack(side="right")
-
-    create_button(
-        panel,
-        "APPLY MARKET CHANGES",
-        command=lambda: on_apply(
-            price_var.get(),
-            trend_var.get(),
-            pe_var.get(),
-            revenue_var.get(),
-            earnings_var.get(),
-            volume_var.get()
-        ) if on_apply else None
-    ).pack(
-        anchor="e",
-        padx=15,
-        pady=(15, 10)
-    )
 
     return panel

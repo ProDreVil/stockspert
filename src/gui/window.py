@@ -13,7 +13,7 @@ from config import (
     WINDOW_TITLE
 )
 from gui.header import build_header
-from gui.market import build_market
+from gui.stocks import build_market
 from gui.portfolio import build_portfolio
 from gui.simulation import build_simulation
 from market import Market
