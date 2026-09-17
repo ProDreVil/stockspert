@@ -17,13 +17,14 @@ def build_header(parent, date_text):
         bg=BG_COLOR
     ).pack(side="left")
 
-    create_label(
+    date_label = create_label(
         top,
         date_text,
         font=("Segoe UI", 10),
         color=SECONDARY_TEXT,
         bg=BG_COLOR
-    ).pack(side="right")
+    )
+    date_label.pack(side="right")
 
     create_label(
         header,
@@ -33,4 +34,4 @@ def build_header(parent, date_text):
         bg=BG_COLOR
     ).pack(anchor="w", pady=(2, 0))
 
-    return header
+    return header, date_label

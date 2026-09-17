@@ -40,8 +40,15 @@ class StockspertGUI:
 
     def build_ui(self):
         current_date = datetime.now().strftime("%B %d, %Y")
-        header = build_header(self.root, current_date)
-        header.pack(fill="x", padx=25, pady=(18, 10))
+        self.header, self.date_label = build_header(
+            self.root,
+            self.market.current_date.strftime("%B %d, %Y")
+        )
+        self.header.pack(
+            fill="x",
+            padx=25,
+            pady=(18, 10)
+        )
 
         main = tk.Frame(self.root, bg=BG_COLOR)
         main.pack(fill="both", expand=True, padx=25, pady=(10, 20))
@@ -141,6 +148,7 @@ class StockspertGUI:
 
     def advance_simulation(self):
         self.market.advance()
+        self.date_label.configure(text=self.market.current_date.strftime("%B %d, %Y"))
         self.graph.update(self.market.candles)
 
     def run(self):
