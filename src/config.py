@@ -18,8 +18,8 @@ SECONDARY_TEXT = "#AAAAAA"
 ACCENT_COLOR = "#6496ff" #highlights
 SECONDARY_COLOR = "#058b7b" #active buttons, stock price text
 DISABLED_COLOR = "#0a1620" #disabled buttons
-UP_GRAPH_COLOR = "#eb3055"
-DOWN_GRAPH_COLOR = "#06ba8a"
+UP_GRAPH_COLOR = "#06ba8a"
+DOWN_GRAPH_COLOR = "#eb3055"
 
 BUY_COLOR = "#4CAF50"
 HOLD_COLOR = "#FFC107"

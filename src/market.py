@@ -59,6 +59,21 @@ class Market:
 
         return candle
 
+    def get_trend(self):
+        if len(self.candles) < 5:
+            return "Sideways"
+        oldest_price = self.candles[-5]["close"]
+        latest_price = self.candles[-1]["close"]
+        change_percent = (
+            (latest_price - oldest_price)
+            / oldest_price
+        ) * 100
+        if change_percent > 1.5:
+            return "Uptrend"
+        if change_percent < -1.5:
+            return "Downtrend"
+        return "Sideways"
+
     def advance(self, days=1):
         self.current_date += timedelta(days=days)
         return self._create_candle(days)

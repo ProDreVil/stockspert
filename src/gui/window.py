@@ -170,6 +170,10 @@ class StockspertGUI:
             f"{self.market.current_price:.2f}"
         )
 
+        self.market_gui["trend_var"].set(
+            self.market.get_trend()
+        )
+
         self.date_label.configure(
             text=self.market.current_date.strftime("%B %d, %Y")
         )

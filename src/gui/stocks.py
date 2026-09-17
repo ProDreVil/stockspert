@@ -79,5 +79,6 @@ def build_market(parent, on_apply=None, initial_price=100.00):
 
     return {
         "frame": panel,
-        "price_var": price_var
+        "price_var": price_var,
+        "trend_var": trend_var
     }
