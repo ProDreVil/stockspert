@@ -96,7 +96,8 @@ class StockspertGUI:
             pe.lower(),
             revenue.lower(),
             earnings.lower(),
-            volume.lower()
+            volume.lower(),
+            self.market.price_history
         )
 
         recommendation_colors = {

@@ -15,7 +15,7 @@
 
   * [ ] Insufficient cash → HOLD
   * [ ] No shares to sell → HOLD
-* [ ] Add fallback / no-clear-recommendation handling
+* [x] Add fallback / no-clear-recommendation handling
 
 ---
 
@@ -64,7 +64,7 @@
 
 * [x] Expert System Analysis section
 * [x] Recommendation display
-* [ ] Confidence display
+* [x] Confidence display
 * [x] Rule Fired display
 * [x] Reason / explanation display
 * [x] BUY / HOLD / SELL visual indication
@@ -74,8 +74,8 @@
 
 * [x] Use config colors in portfolio
 * [x] Use config colors in simulation
-* [ ] Use config colors in remaining GUI files
-* [ ] Stabilize analysis layout for varying text lengths
+* [x] Use config colors in remaining GUI files
+* [x] Stabilize analysis layout for varying text lengths
 
 ---
 
@@ -159,7 +159,7 @@
 
 * [x] **Priority 1:** Connect GUI → CLIPS
 * [x] **Priority 2:** Make recommendations work correctly
-* [ ] **Priority 3:** Finish graph + confidence
+* [x] **Priority 3:** Finish graph + confidence
 * [ ] **Priority 4:** Integrate portfolio rules
 * [ ] **Priority 5:** Finish day-based market simulation
 * [ ] **Priority 6:** Add longer time units + Random Market
