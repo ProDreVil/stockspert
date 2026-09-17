@@ -23,7 +23,7 @@
 
 ### Market Information
 
-* [x] Stock Price input
+* [x] Stock Price display
 * [x] Trend dropdown
 * [x] P/E Ratio dropdown
 * [x] Revenue Growth dropdown
@@ -31,17 +31,17 @@
 * [x] Trading Volume dropdown
 * [ ] Price Change display
 * [ ] Last Updated display
-* [x] Apply Market Changes button
+* [x] Automatic market input updates
 
 ### Simulation Status
 
 * [x] Current simulated date
-* [x] Time amount input
-* [x] Time unit dropdown
+* [x] Day / Week / Month inputs
 * [x] NEXT button
-* [x] RANDOM button
-* [x] Stack NEXT and RANDOM vertically
-* [x] Center NEXT and RANDOM buttons
+* [x] ADVANCE button
+* [x] RANDOMIZE button
+* [x] Direction controls
+* [x] Add Cash controls
 
 ### Portfolio
 
@@ -58,7 +58,8 @@
 
 * [x] Price history graph
 * [x] Make graph fit the larger layout
-* [ ] Update graph when simulation advances
+* [x] Update graph when simulation advances
+* [x] Candle hover information
 
 ### Expert System Analysis
 
@@ -76,12 +77,14 @@
 * [x] Use config colors in simulation
 * [x] Use config colors in remaining GUI files
 * [x] Stabilize analysis layout for varying text lengths
+* [x] Read-only simulated stock price
+* [x] Automatically update displayed stock price
 
 ---
 
 ## 3. Portfolio Simulation
 
-* [ ] Starting cash: $10,000
+* [ ] Starting cash: decide between `$100` and `$1,000`
 * [ ] Track shares owned
 * [ ] Track invested amount
 * [ ] Calculate portfolio value
@@ -91,17 +94,22 @@
 * [ ] Sell stocks
 * [ ] Prevent buying without sufficient cash
 * [ ] Prevent selling without sufficient shares
+* [ ] Connect portfolio state to GUI
+* [ ] Connect portfolio state to CLIPS
 
 ---
 
 ## 4. Stock Simulation
 
 * [x] Generate simulated stock prices
-* [ ] Advance simulation by selected time
+* [x] Advance simulation by selected time
+* [ ] Make longer advances feel meaningfully different
 * [ ] Randomize market conditions
-* [ ] Update price history
+* [x] Update price history
 * [ ] Update market indicators
-* [ ] Update simulated date
+* [x] Update simulated date
+* [ ] Make market indicators change coherently with price movement
+* [ ] Add longer time units / year advancement
 
 ---
 
@@ -114,6 +122,8 @@
 * [ ] Test SELL recommendation
 * [ ] Test no matching rule
 * [ ] Test rule priority / overlapping rules
+* [ ] Test Uptrend + High P/E rule
+* [ ] Test automatic recommendation updates
 
 ### Portfolio
 
@@ -124,6 +134,7 @@
 * [ ] Test selling multiple shares
 * [ ] Test selling with 0 shares
 * [ ] Test selling more shares than owned
+* [ ] Test portfolio value calculation
 
 ### Simulation
 
@@ -132,9 +143,11 @@
 * [ ] Test month advancement
 * [ ] Test year advancement
 * [ ] Test stock price changes
-* [ ] Test graph updates
+* [x] Test graph updates
+* [ ] Test market indicator updates
 * [ ] Test portfolio value updates
 * [ ] Test Random Market
+* [ ] Test longer time advances
 
 ---
 
@@ -160,8 +173,15 @@
 * [x] **Priority 1:** Connect GUI → CLIPS
 * [x] **Priority 2:** Make recommendations work correctly
 * [x] **Priority 3:** Finish graph + confidence
-* [ ] **Priority 4:** Integrate portfolio rules
-* [ ] **Priority 5:** Finish day-based market simulation
-* [ ] **Priority 6:** Add longer time units + Random Market
+* [ ] **Priority 4:** Fix market simulation
+* [ ] **Priority 5:** Integrate portfolio rules
+* [ ] **Priority 6:** Finish buy/sell simulation
 * [ ] **Priority 7:** Test everything
 * [ ] **Priority 8:** Polish and document
+
+### Next Session
+
+1. **Decide starting money:** `$100` vs `$1,000`
+2. **Fix market indicators not updating**
+3. **Make ADVANCE feel like an actual week/month instead of one day**
+4. Continue with portfolio

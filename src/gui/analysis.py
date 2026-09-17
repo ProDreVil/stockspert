@@ -58,6 +58,13 @@ def update_reasons(reasons_frame, rule):
             ("Positive Earnings Growth", BUY_COLOR),
         ],
 
+        "HOLD-UPTREND-HIGH-PE": [
+            ("Uptrend", BUY_COLOR),
+            ("High P/E Ratio", SELL_COLOR),
+            ("Positive Revenue Growth", BUY_COLOR),
+            ("Positive Earnings Growth", BUY_COLOR),
+        ],
+
         "HOLD-DOWNTREND-NEUTRAL-REVENUE": [
             ("Downtrend", SELL_COLOR),
             ("Neutral Revenue Growth", HOLD_COLOR),

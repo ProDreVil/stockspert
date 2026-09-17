@@ -1,4 +1,3 @@
-```
 └── 📁stockspert
     └── 📁clips
         └── 📁rules
@@ -13,42 +12,30 @@
     └── 📁docs
         ├── clips-exe-path.txt
         ├── clips-run.txt
+        ├── confidence-calculation.md
         ├── gui-plan.txt
         ├── stock-market-docu.md
+        ├── stock-mockup.png
         ├── structure.md
         ├── TODO.md
     └── 📁src
-        └── 📁__pycache__
-            ├── clips.cpython-314.pyc
-            ├── components.cpython-314.pyc
-            ├── config.cpython-314.pyc
-            ├── gui.cpython-314.pyc
         └── 📁gui
-            └── 📁__pycache__
-                ├── __init__.cpython-314.pyc
-                ├── analysis.cpython-314.pyc
-                ├── components.cpython-314.pyc
-                ├── graph.cpython-314.pyc
-                ├── header.cpython-314.pyc
-                ├── market.cpython-314.pyc
-                ├── portfolio.cpython-314.pyc
-                ├── simulation.cpython-314.pyc
-                ├── window.cpython-314.pyc
             ├── __init__.py
             ├── analysis.py
             ├── components.py
             ├── graph.py
             ├── header.py
-            ├── market.py
             ├── portfolio.py
             ├── simulation.py
+            ├── stocks.py
             ├── window.py
         ├── clips.py
+        ├── confidence.py
         ├── config.py
         ├── main.py
+        ├── market.py
         ├── portfolio.py
-        ├── simulate.py
         ├── test.py
+    ├── .gitignore
     ├── LICENSE
     └── README.md
-```

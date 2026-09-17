@@ -66,9 +66,17 @@ class StockspertGUI:
         self.graph = StockGraph(graph_panel)
         self.graph.frame.pack(fill="both", expand=True)
 
-        build_market(main, on_apply=self.apply_market_changes).grid(
-            row=0, column=1,
-            sticky="nsew", padx=5
+        self.market_gui = build_market(
+            main,
+            on_apply=self.apply_market_changes,
+            initial_price=self.market.current_price
+        )
+
+        self.market_gui["frame"].grid(
+            row=0,
+            column=1,
+            sticky="nsew",
+            padx=5
         )
 
         build_portfolio(main).grid(
@@ -156,7 +164,15 @@ class StockspertGUI:
 
     def advance_simulation(self, days=1):
         self.market.advance(days)
-        self.date_label.configure(text=self.market.current_date.strftime("%B %d, %Y"))
+
+        self.market_gui["price_var"].set(
+            f"{self.market.current_price:.2f}"
+        )
+
+        self.date_label.configure(
+            text=self.market.current_date.strftime("%B %d, %Y")
+        )
+
         self.graph.update(self.market.candles)
 
     def advance_by_input(self):

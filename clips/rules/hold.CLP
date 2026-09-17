@@ -50,6 +50,24 @@
          (rule "HOLD-UPTREND-FAIR-PE-NEUTRAL-REVENUE"))))
 
 
+(defrule hold-stock-high-pe
+
+   (stock
+      (trend uptrend)
+      (pe high)
+      (revenue positive)
+      (earnings positive))
+
+   (not (recommendation))
+
+   =>
+
+   (assert
+      (recommendation
+         (action hold)
+         (rule "HOLD-UPTREND-HIGH-PE"))))
+
+
 (defrule hold-stock-downtrend
 
    (stock

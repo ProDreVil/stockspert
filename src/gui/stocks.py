@@ -10,10 +10,10 @@ from gui.components import (
 )
 
 
-def build_market(parent, on_apply=None):
+def build_market(parent, on_apply=None, initial_price=100.00):
     panel = create_section(parent, "MARKET INFORMATION")
 
-    price_var = tk.StringVar(value="100.00")
+    price_var = tk.StringVar(value=f"{initial_price:.2f}")
     trend_var = tk.StringVar(value="Uptrend")
     pe_var = tk.StringVar(value="Low")
     revenue_var = tk.StringVar(value="Positive")
@@ -65,10 +65,19 @@ def build_market(parent, on_apply=None):
                 values
             ).pack(side="right")
         else:
-            create_entry(
+            price_entry = create_entry(
                 row,
                 variable=variable,
                 width=12
-            ).pack(side="right")
+            )
 
-    return panel
+            price_entry.configure(
+                state="readonly",
+                readonlybackground=GRAPH_COLOR
+            )
+            price_entry.pack(side="right")
+
+    return {
+        "frame": panel,
+        "price_var": price_var
+    }
