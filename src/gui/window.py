@@ -1,5 +1,6 @@
 from py_compile import main
 import tkinter as tk
+import random
 from datetime import datetime
 
 from clips import get_recommendation
@@ -25,7 +26,7 @@ from gui.graph import StockGraph
 
 
 class StockspertGUI:
-    def __init__(self):
+    def __init__(self, starting_price=None):
         self.root = tk.Tk()
         self.root.title(WINDOW_TITLE)
         self.root.configure(bg=BG_COLOR)
@@ -33,7 +34,7 @@ class StockspertGUI:
         if START_MAXIMIZED:
             self.root.state("zoomed")
         
-        self.market = Market(starting_price=100.00)
+        self.market = Market(starting_price=random.uniform(500.00, 2000.00))
         self.build_ui()
         self.graph.update(self.market.candles)
         self.initialize_analysis()

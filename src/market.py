@@ -3,7 +3,9 @@ from datetime import datetime, timedelta
 
 
 class Market:
-    def __init__(self, starting_price=100.00):
+    def __init__(self, starting_price=None):
+        if starting_price is None:
+            starting_price = random.uniform(500.00, 2000.00)
         self.current_price = starting_price
         self.current_date = datetime.now()
         self.candles = []
@@ -24,21 +26,22 @@ class Market:
     def _create_candle(self):
         open_price = self.current_price
 
-        change = random.uniform(-2.00, 2.00)
+        change_percent = random.uniform(-1.0, 1.0)
+        change = open_price * (change_percent / 100)
 
         close_price = max(
             1.00,
             open_price + change
         )
 
+        wick_percent = random.uniform(0.0, 0.5)
         high_price = (
             max(open_price, close_price)
-            + random.uniform(0.00, 1.50)
+            + open_price * (wick_percent / 100)
         )
-
         low_price = (
             min(open_price, close_price)
-            - random.uniform(0.00, 1.50)
+            - open_price * (wick_percent / 100)
         )
 
         low_price = max(1.00, low_price)
