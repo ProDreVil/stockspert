@@ -1,5 +1,6 @@
 from py_compile import main
 import tkinter as tk
+from datetime import datetime
 
 from clips import get_recommendation
 from config import (
@@ -38,7 +39,8 @@ class StockspertGUI:
         self.initialize_analysis()
 
     def build_ui(self):
-        header = build_header(self.root, "January 1, 2026")
+        current_date = datetime.now().strftime("%B %d, %Y")
+        header = build_header(self.root, current_date)
         header.pack(fill="x", padx=25, pady=(18, 10))
 
         main = tk.Frame(self.root, bg=BG_COLOR)

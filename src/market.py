@@ -1,9 +1,10 @@
 import random
-
+from datetime import datetime
 
 class Market:
     def __init__(self, starting_price=100.00):
         self.current_price = starting_price
+        self.current_date = datetime.now()
         self.candles = []
         for _ in range(7):
             self.advance()
@@ -31,6 +32,7 @@ class Market:
         low_price = max(1.00, low_price)
 
         candle = {
+            "date": self.current_date,
             "open": open_price,
             "high": high_price,
             "low": low_price,

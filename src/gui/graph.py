@@ -171,7 +171,7 @@ class StockGraph:
             )
 
     def _on_hover(self, event):
-        for x, candle_width, candle in self.candle_positions:
+        for index, (x, candle_width, candle) in enumerate(self.candle_positions):
             if (
                 x - candle_width / 2
                 <= event.x
@@ -180,23 +180,33 @@ class StockGraph:
                 self._show_tooltip(
                     event.x,
                     event.y,
-                    candle
+                    candle,
+                    index
                 )
                 return
         self._hide_tooltip()
 
-    def _show_tooltip(self, x, y, candle):
+    def _show_tooltip(self, x, y, candle, index):
         if candle["close"] >= candle["open"]:
             border_color = UP_GRAPH_COLOR
         else:
             border_color = DOWN_GRAPH_COLOR
+        if index > 0:
+            previous_close = self.candles[index - 1]["close"]
+            change = candle["close"] - previous_close
+            change_percent = (change / previous_close) * 100
+        else:
+            change = 0
+            change_percent = 0
+        date_text = candle["date"].strftime("%B %d, %Y")
         text = (
+            f"{date_text}\n\n"
             f"Open: ${candle['open']:.2f}\n"
             f"High: ${candle['high']:.2f}\n"
             f"Low: ${candle['low']:.2f}\n"
-            f"Close: ${candle['close']:.2f}"
+            f"Close: ${candle['close']:.2f}\n\n"
+            f"Change: {change:+.2f} ({change_percent:+.2f}%)"
         )
-
         if self.tooltip is None:
             self.tooltip = tk.Toplevel(self.canvas)
             self.tooltip.overrideredirect(True)
