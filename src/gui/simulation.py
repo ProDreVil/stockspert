@@ -27,10 +27,8 @@ def build_simulation(parent, on_next=None, on_advance=None):
         bg=GRAPH_COLOR
     ).pack(side="left", padx=(15, 5))
 
-    create_entry(
-        top,
-        width=4
-    ).pack(side="left")
+    day_entry = create_entry(top, width=4)
+    day_entry.pack(side="left")
 
     create_label(
         top,
@@ -38,10 +36,8 @@ def build_simulation(parent, on_next=None, on_advance=None):
         bg=GRAPH_COLOR
     ).pack(side="left", padx=(10, 5))
 
-    create_entry(
-        top,
-        width=4
-    ).pack(side="left")
+    week_entry = create_entry(top, width=4)
+    week_entry.pack(side="left")
 
     create_label(
         top,
@@ -49,10 +45,8 @@ def build_simulation(parent, on_next=None, on_advance=None):
         bg=GRAPH_COLOR
     ).pack(side="left", padx=(10, 5))
 
-    create_entry(
-        top,
-        width=4
-    ).pack(side="left")
+    month_entry = create_entry(top, width=4)
+    month_entry.pack(side="left")
 
     actions = tk.Frame(
         panel,
@@ -133,4 +127,9 @@ def build_simulation(parent, on_next=None, on_advance=None):
         width=8
     ).pack(side="left", padx=4)
 
-    return panel
+    return {
+        "frame": panel,
+        "day_entry": day_entry,
+        "week_entry": week_entry,
+        "month_entry": month_entry
+    }

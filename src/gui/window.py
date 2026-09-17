@@ -76,9 +76,17 @@ class StockspertGUI:
             sticky="nsew", padx=(5, 0)
         )
 
-        build_simulation(main, on_next=self.advance_simulation, on_advance=self.advance_simulation).grid(
-            row=1, column=0,
-            sticky="nsew", padx=(0, 5), pady=(10, 0)
+        self.simulation = build_simulation(
+            main,
+            on_next=self.advance_simulation,
+            on_advance=self.advance_by_input
+        )
+        self.simulation["frame"].grid(
+            row=1,
+            column=0,
+            sticky="nsew",
+            padx=(0, 5),
+            pady=(10, 0)
         )
 
         self.analysis = build_analysis(main)
@@ -146,10 +154,26 @@ class StockspertGUI:
             "Average",
         )
 
-    def advance_simulation(self):
-        self.market.advance()
+    def advance_simulation(self, days=1):
+        self.market.advance(days)
         self.date_label.configure(text=self.market.current_date.strftime("%B %d, %Y"))
         self.graph.update(self.market.candles)
+
+    def advance_by_input(self):
+        try:
+            day = int(self.simulation["day_entry"].get() or 0)
+            week = int(self.simulation["week_entry"].get() or 0)
+            month = int(self.simulation["month_entry"].get() or 0)
+        except ValueError:
+            return
+        total_days = (
+            day
+            + (week * 7)
+            + (month * 30)
+        )
+        if total_days <= 0:
+            return
+        self.advance_simulation(total_days)
 
     def run(self):
         self.root.mainloop()
