@@ -10,9 +10,9 @@ class Market:
         self.current_date = datetime.now()
         self.candles = []
 
-        start_date = self.current_date - timedelta(days=6)
+        start_date = self.current_date - timedelta(days=9)
 
-        for _ in range(7):
+        for _ in range(10):
             self.current_date = start_date
             self._create_candle()
             start_date += timedelta(days=1)
@@ -23,10 +23,10 @@ class Market:
     def price_history(self):
         return [candle["close"] for candle in self.candles]
 
-    def _create_candle(self):
+    def _create_candle(self, days=1):
         open_price = self.current_price
 
-        change_percent = random.uniform(-1.0, 1.0)
+        change_percent = random.uniform(-1.0, 1.0) * (days ** 0.5)
         change = open_price * (change_percent / 100)
 
         close_price = max(
@@ -61,5 +61,4 @@ class Market:
 
     def advance(self, days=1):
         self.current_date += timedelta(days=days)
-
-        return self._create_candle()
+        return self._create_candle(days)
