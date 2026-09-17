@@ -69,7 +69,7 @@ class StockspertGUI:
             sticky="nsew", padx=(5, 0)
         )
 
-        build_simulation(main, on_next=self.advance_simulation).grid(
+        build_simulation(main, on_next=self.advance_simulation, on_advance=self.advance_simulation).grid(
             row=1, column=0,
             sticky="nsew", padx=(0, 5), pady=(10, 0)
         )
