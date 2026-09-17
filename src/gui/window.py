@@ -165,14 +165,22 @@ class StockspertGUI:
 
     def advance_simulation(self, days=1):
         self.market.advance(days)
+        current_price = self.market.current_price
+        previous_price = self.market.candles[-2]["close"]
+
+        change = current_price - previous_price
+        change_percent = (change / previous_price) * 100
 
         self.market_gui["price_var"].set(
-            f"{self.market.current_price:.2f}"
+            f"${current_price:.2f}"
         )
 
-        self.market_gui["trend_var"].set(
-            self.market.get_trend()
+        self.market_gui["change_var"].set(
+            f"${change:+.2f} ({change_percent:+.2f}%)"
         )
+
+        trend = self.market.get_trend()
+        self.market_gui["trend_var"].set(trend)
 
         self.date_label.configure(
             text=self.market.current_date.strftime("%B %d, %Y")

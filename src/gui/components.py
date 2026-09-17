@@ -12,15 +12,17 @@ from config import (
 
 def create_label(
     parent,
-    text,
+    text=None,
     font=("Segoe UI", 10),
     color=TEXT_COLOR,
     bg=PANEL_COLOR,
+    textvariable=None,
     **kwargs
 ):
     return tk.Label(
         parent,
         text=text,
+        textvariable=textvariable,
         font=font,
         fg=color,
         bg=bg,
