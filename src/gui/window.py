@@ -87,7 +87,8 @@ class StockspertGUI:
         self.simulation = build_simulation(
             main,
             on_next=self.advance_simulation,
-            on_advance=self.advance_by_input
+            on_advance=self.advance_by_input,
+            on_return=self.return_simulation
         )
         self.simulation["frame"].grid(
             row=1,
@@ -240,6 +241,19 @@ class StockspertGUI:
 
         self.market_gui["volume_value_var"].set(f"{self.market.volume / 1000000:.2f}M")
         self.market_gui["volume_var"].set(self.market.get_volume_classification())
+
+        self.refresh_market_ui()
+
+    def return_simulation(self):
+        if not self.market.return_previous():
+            return
+
+        if self.simulation_day > 1:
+            self.simulation_day -= 1
+
+        self.simulation_day_label.configure(
+            text=f"Day {self.simulation_day}"
+        )
 
         self.refresh_market_ui()
 

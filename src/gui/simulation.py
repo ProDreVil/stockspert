@@ -77,7 +77,7 @@ def create_simulation_button(
     return border
 
 
-def build_simulation(parent, on_next=None, on_advance=None):
+def build_simulation(parent, on_next=None, on_advance=None, on_return=None):
 
     frame = create_section(parent, "SIMULATION")
 
@@ -114,6 +114,7 @@ def build_simulation(parent, on_next=None, on_advance=None):
     create_simulation_button(
         left_top,
         "RETURN",
+        command=on_return,
         bg=RETURN_BUTTON_COLOR,
         border_color=RETURN_BUTTON_BORDER_COLOR
     ).pack(side="left", padx=2)

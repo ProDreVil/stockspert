@@ -1,4 +1,5 @@
 import random
+import copy
 from datetime import datetime, timedelta
 
 
@@ -15,6 +16,8 @@ class Market:
 
         self.current_date = datetime.now()
         self.candles = []
+        self.state_history = []
+        self.max_history = 200
 
         start_date = self.current_date - timedelta(days=29)
 
@@ -110,7 +113,38 @@ class Market:
 
     def advance(self, days=1):
         for _ in range(days):
+            self.state_history.append({
+                "current_price": self.current_price,
+                "eps": self.eps,
+                "pe_ratio": self.pe_ratio,
+                "revenue_growth": self.revenue_growth,
+                "earnings_growth": self.earnings_growth,
+                "volume": self.volume,
+                "current_date": self.current_date,
+                "candles": copy.deepcopy(self.candles)
+            })
+
+            if len(self.state_history) > self.max_history:
+                self.state_history.pop(0)
+
             self.current_date += timedelta(days=1)
             self._create_candle()
 
         return self.candles[-1]
+
+    def return_previous(self):
+        if not self.state_history:
+            return False
+
+        state = self.state_history.pop()
+
+        self.current_price = state["current_price"]
+        self.eps = state["eps"]
+        self.pe_ratio = state["pe_ratio"]
+        self.revenue_growth = state["revenue_growth"]
+        self.earnings_growth = state["earnings_growth"]
+        self.volume = state["volume"]
+        self.current_date = state["current_date"]
+        self.candles = state["candles"]
+
+        return True
