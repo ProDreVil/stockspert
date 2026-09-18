@@ -8,15 +8,25 @@ from config import (
     BUTTON_BORDER_COLOR,
     BUTTON_TEXT_COLOR,
 
+    NEXT_BUTTON_COLOR,
+    NEXT_BUTTON_BORDER_COLOR,
+    RANDOMIZE_BUTTON_COLOR,
+    RANDOMIZE_BUTTON_BORDER_COLOR,
+    RETURN_BUTTON_COLOR,
+    RETURN_BUTTON_BORDER_COLOR,
+    ADVANCE_BUTTON_COLOR,
+    ADVANCE_BUTTON_BORDER_COLOR,
+    AUTO_BUTTON_COLOR,
+    AUTO_BUTTON_BORDER_COLOR,
+    ADD_BUTTON_COLOR,
+    ADD_BUTTON_BORDER_COLOR,
+
     RISE_BUTTON_COLOR,
     RISE_BUTTON_BORDER_COLOR,
-
     STABLE_BUTTON_COLOR,
     STABLE_BUTTON_BORDER_COLOR,
-
     FALL_BUTTON_COLOR,
     FALL_BUTTON_BORDER_COLOR,
-
     RESET_BUTTON_COLOR,
     RESET_BUTTON_BORDER_COLOR,
     RESET_BUTTON_TEXT_COLOR,
@@ -89,17 +99,23 @@ def build_simulation(parent, on_next=None, on_advance=None):
     create_simulation_button(
         left_top,
         "NEXT",
-        command=on_next
+        command=on_next,
+        bg=NEXT_BUTTON_COLOR,
+        border_color=NEXT_BUTTON_BORDER_COLOR
     ).pack(side="left", padx=2)
 
     create_simulation_button(
         left_top,
-        "RANDOMIZE"
+        "RANDOMIZE",
+        bg=RANDOMIZE_BUTTON_COLOR,
+        border_color=RANDOMIZE_BUTTON_BORDER_COLOR
     ).pack(side="left", padx=2)
 
     create_simulation_button(
         left_top,
-        "RETURN"
+        "RETURN",
+        bg=RETURN_BUTTON_COLOR,
+        border_color=RETURN_BUTTON_BORDER_COLOR
     ).pack(side="left", padx=2)
 
     # RIGHT — ADVANCE
@@ -110,7 +126,9 @@ def build_simulation(parent, on_next=None, on_advance=None):
     create_simulation_button(
         advance,
         "ADVANCE",
-        command=on_advance
+        command=on_advance,
+        bg=ADVANCE_BUTTON_COLOR,
+        border_color=ADVANCE_BUTTON_BORDER_COLOR
     ).pack(side="left", padx=2)
 
     create_label(
@@ -195,7 +213,9 @@ def build_simulation(parent, on_next=None, on_advance=None):
 
     create_simulation_button(
         auto,
-        "AUTO"
+        "AUTO",
+        bg=AUTO_BUTTON_COLOR,
+        border_color=AUTO_BUTTON_BORDER_COLOR
     ).pack(side="left", padx=2)
 
     create_label(
@@ -239,7 +259,9 @@ def build_simulation(parent, on_next=None, on_advance=None):
 
     create_simulation_button(
         cash,
-        "ADD"
+        "ADD",
+        bg=ADD_BUTTON_COLOR,
+        border_color=ADD_BUTTON_BORDER_COLOR
     ).pack(side="left", padx=26)
 
     return {

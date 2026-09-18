@@ -150,7 +150,7 @@ def build_analysis(parent):
     left = tk.Frame(
         content,
         bg=GRAPH_COLOR,
-        width=380
+        width=300
     )
     left.pack(
         side="left",
@@ -200,7 +200,7 @@ def build_analysis(parent):
         side="left",
         fill="both",
         expand=True,
-        padx=(50, 0)
+        padx=(0, 0)
     )
 
     create_label(
