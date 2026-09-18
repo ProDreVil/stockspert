@@ -51,11 +51,11 @@ class StockspertGUI:
         )
 
         main = tk.Frame(self.root, bg=BG_COLOR)
-        main.pack(fill="both", expand=True, padx=25, pady=(10, 20))
+        main.pack(fill="both", expand=True, padx=0, pady=(10, 20))
 
-        main.grid_columnconfigure(0, weight=30)
-        main.grid_columnconfigure(1, weight=30)
-        main.grid_columnconfigure(2, weight=30)
+        main.grid_columnconfigure(0, minsize=500, weight=0)
+        main.grid_columnconfigure(1, weight=250)
+        main.grid_columnconfigure(2, weight=350)
 
         main.grid_rowconfigure(0, weight=2)
         main.grid_rowconfigure(1, weight=1, minsize=180)

@@ -13,9 +13,9 @@ class Market:
         self.current_date = datetime.now()
         self.candles = []
 
-        start_date = self.current_date - timedelta(days=9)
+        start_date = self.current_date - timedelta(days=29)
 
-        for _ in range(10):
+        for _ in range(30):
             self.current_date = start_date
             self._create_candle()
             start_date += timedelta(days=1)

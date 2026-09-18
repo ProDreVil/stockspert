@@ -88,8 +88,8 @@ def build_simulation(parent, on_next=None, on_advance=None):
     controls = tk.Frame(frame, bg=PANEL_COLOR)
     controls.pack(fill="x", padx=12, pady=(10, 4))
 
-    controls.grid_columnconfigure(0, weight=1)
-    controls.grid_columnconfigure(1, weight=1)
+    controls.grid_columnconfigure(0, weight=0)
+    controls.grid_columnconfigure(1, weight=0)
 
     # LEFT — NEXT / RANDOMIZE / RETURN
 
@@ -121,7 +121,7 @@ def build_simulation(parent, on_next=None, on_advance=None):
     # RIGHT — ADVANCE
 
     advance = tk.Frame(controls, bg=PANEL_COLOR)
-    advance.grid(row=0, column=1, sticky="e", padx=(0, 50))
+    advance.grid(row=0, column=1, sticky="e", padx=(20, 0))
 
     create_simulation_button(
         advance,
@@ -174,8 +174,8 @@ def build_simulation(parent, on_next=None, on_advance=None):
     controls_bottom = tk.Frame(frame, bg=PANEL_COLOR)
     controls_bottom.pack(fill="x", padx=12, pady=(4, 10))
 
-    controls_bottom.grid_columnconfigure(0, weight=1)
-    controls_bottom.grid_columnconfigure(1, weight=1)
+    controls_bottom.grid_columnconfigure(0, weight=0)
+    controls_bottom.grid_columnconfigure(1, weight=0)
 
     # LEFT — RISE / STABLE / FALL
 
@@ -209,7 +209,7 @@ def build_simulation(parent, on_next=None, on_advance=None):
     # RIGHT — AUTO / RESET
 
     auto = tk.Frame(controls_bottom, bg=PANEL_COLOR)
-    auto.grid(row=0, column=1, sticky="e", padx=(0, 132))
+    auto.grid(row=0, column=1, sticky="e", padx=(20, 0))
 
     create_simulation_button(
         auto,
@@ -236,7 +236,7 @@ def build_simulation(parent, on_next=None, on_advance=None):
         bg=RESET_BUTTON_COLOR,
         border_color=RESET_BUTTON_BORDER_COLOR,
         text_color=RESET_BUTTON_TEXT_COLOR
-    ).pack(side="left", padx=(8, 2))
+    ).pack(side="left", padx=(50, 2))
 
     # =========================
     # ADD CASH
