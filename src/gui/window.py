@@ -39,7 +39,6 @@ class StockspertGUI:
         self.initialize_analysis()
 
     def build_ui(self):
-        current_date = datetime.now().strftime("%B %d, %Y")
         self.header, self.date_label = build_header(
             self.root,
             self.market.current_date.strftime("%B %d, %Y")
@@ -157,10 +156,23 @@ class StockspertGUI:
 
     def refresh_market_ui(self):
         current_price = self.market.current_price
-
         self.market_gui["price_var"].set(f"${current_price:.2f}")
+        previous_price = self.market.candles[-2]["close"]
+        change = current_price - previous_price
+        change_percent = (change / previous_price) * 100
+        self.market_gui["change_var"].set(f"{'+$' if change >= 0 else '-$'}{abs(change):.2f} ({change_percent:+.2f}%)")
+        self.market_gui["trend_var"].set(self.market.get_trend())
+        trend_change = ((self.market.candles[-1]["close"] - self.market.candles[-5]["close"])/ self.market.candles[-5]["close"]) * 100
+        self.market_gui["trend_change_var"].set(f"{trend_change:+.2f}%")
         self.market_gui["pe_value_var"].set(f"{self.market.pe_ratio:.2f}")
         self.market_gui["pe_var"].set(self.market.get_pe_classification())
+        self.market_gui["revenue_value_var"].set(f"{self.market.revenue_growth:+.2f}%")
+        self.market_gui["revenue_var"].set(self.market.get_revenue_classification())
+        self.market_gui["earnings_value_var"].set(f"{self.market.earnings_growth:+.2f}%")
+        self.market_gui["earnings_var"].set(self.market.get_earnings_classification())
+        self.market_gui["volume_value_var"].set(f"{self.market.volume / 1000000:.2f}M")
+        self.market_gui["volume_var"].set(self.market.get_volume_classification())
+
         self.date_label.configure(text=self.market.current_date.strftime("%B %d, %Y"))
         self.graph.update(self.market.candles)
 
@@ -200,13 +212,9 @@ class StockspertGUI:
         change = current_price - previous_price
         change_percent = (change / previous_price) * 100
 
-        self.market_gui["price_var"].set(
-            f"${current_price:.2f}"
-        )
+        self.market_gui["price_var"].set(f"${current_price:.2f}")
 
-        self.market_gui["change_var"].set(
-            f"${change:+.2f} ({change_percent:+.2f}%)"
-        )
+        self.market_gui["change_var"].set(f"{'+$' if change >= 0 else '-$'}{abs(change):.2f} ({change_percent:+.2f}%)")
 
         trend = self.market.get_trend()
         self.market_gui["trend_var"].set(trend)
@@ -216,27 +224,18 @@ class StockspertGUI:
             / self.market.candles[-5]["close"]
         ) * 100
 
-        self.market_gui["trend_change_var"].set(
-            f"{trend_change:+.2f}%"
-        )
+        self.market_gui["trend_change_var"].set(f"{trend_change:+.2f}%")
 
-        self.market_gui["pe_value_var"].set(
-            f"{self.market.pe_ratio:.2f}"
-        )
+        self.market_gui["pe_value_var"].set(f"{self.market.pe_ratio:.2f}")
 
-        self.market_gui["revenue_value_var"].set(
-            f"{self.market.revenue_growth:+.2f}%"
-        )
-        self.market_gui["revenue_var"].set(
-            self.market.get_revenue_classification()
-        )
+        self.market_gui["revenue_value_var"].set(f"{self.market.revenue_growth:+.2f}%")
+        self.market_gui["revenue_var"].set(self.market.get_revenue_classification())
 
-        self.market_gui["earnings_value_var"].set(
-            f"{self.market.earnings_growth:+.2f}%"
-        )
-        self.market_gui["earnings_var"].set(
-            self.market.get_earnings_classification()
-        )
+        self.market_gui["earnings_value_var"].set(f"{self.market.earnings_growth:+.2f}%")
+        self.market_gui["earnings_var"].set(self.market.get_earnings_classification())
+
+        self.market_gui["volume_value_var"].set(f"{self.market.volume / 1000000:.2f}M")
+        self.market_gui["volume_var"].set(self.market.get_volume_classification())
 
         self.refresh_market_ui()
 

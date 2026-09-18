@@ -107,7 +107,7 @@ class StockGraph:
                 text=f"${price:.2f}",
                 fill=SECONDARY_TEXT,
                 anchor="e",
-                font=("Segoe UI", 9)
+                font=("Consolas", 8)
             )
         candle_width = max(
             4,
@@ -192,9 +192,8 @@ class StockGraph:
         else:
             border_color = DOWN_GRAPH_COLOR
         if index > 0:
-            previous_close = self.candles[index - 1]["close"]
-            change = candle["close"] - previous_close
-            change_percent = (change / previous_close) * 100
+            change = candle["close"] - candle["open"]
+            change_percent = (change / candle["open"]) * 100
         else:
             change = 0
             change_percent = 0
@@ -205,7 +204,7 @@ class StockGraph:
             f"High: ${candle['high']:.2f}\n"
             f"Low: ${candle['low']:.2f}\n"
             f"Close: ${candle['close']:.2f}\n\n"
-            f"Change: {change:+.2f} ({change_percent:+.2f}%)"
+            f"Change: {'+$' if change >= 0 else '-$'}{abs(change):.2f} ({change_percent:+.2f}%)"
         )
         if self.tooltip is None:
             self.tooltip = tk.Toplevel(self.canvas)
