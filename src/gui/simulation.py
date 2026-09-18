@@ -121,7 +121,7 @@ def build_simulation(parent, on_next=None, on_advance=None):
     # RIGHT — ADVANCE
 
     advance = tk.Frame(controls, bg=PANEL_COLOR)
-    advance.grid(row=0, column=1, sticky="e")
+    advance.grid(row=0, column=1, sticky="e", padx=(0, 50))
 
     create_simulation_button(
         advance,
@@ -209,7 +209,7 @@ def build_simulation(parent, on_next=None, on_advance=None):
     # RIGHT — AUTO / RESET
 
     auto = tk.Frame(controls_bottom, bg=PANEL_COLOR)
-    auto.grid(row=0, column=1, sticky="e", padx=(0, 82))
+    auto.grid(row=0, column=1, sticky="e", padx=(0, 132))
 
     create_simulation_button(
         auto,

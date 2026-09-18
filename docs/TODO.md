@@ -24,14 +24,11 @@
 ### Market Information
 
 * [x] Stock Price display
-* [x] Trend dropdown
-* [x] P/E Ratio dropdown
-* [x] Revenue Growth dropdown
-* [x] Earnings Growth dropdown
-* [x] Trading Volume dropdown
-* [ ] Price Change display
-* [ ] Last Updated display
-* [x] Automatic market input updates
+* [x] Remove manual market indicator dropdowns
+* [ ] Automatically calculate market indicators
+* [x] Price Change display
+* [x] Last Updated display
+* [ ] Automatically update analysis from market state
 
 ### Simulation Status
 
@@ -39,9 +36,18 @@
 * [x] Day / Week / Month inputs
 * [x] NEXT button
 * [x] ADVANCE button
-* [x] RANDOMIZE button
-* [x] Direction controls
-* [x] Add Cash controls
+* [ ] RANDOMIZE functionality
+* [ ] Direction controls functionality
+
+  * [ ] RISE
+  * [ ] STABLE
+  * [ ] FALL
+* [ ] AUTO functionality
+* [ ] RESET functionality
+* [ ] SPEED control
+* [ ] Add Cash functionality
+* [x] Simulation button styling
+* [x] Align simulation controls
 
 ### Portfolio
 
@@ -70,6 +76,10 @@
 * [x] Reason / explanation display
 * [x] BUY / HOLD / SELL visual indication
 * [x] Color-code reasons by meaning
+* [ ] Restore automatic analysis updates
+* [ ] Make analysis use simulated market indicators
+* [ ] Make analysis update after every simulation action
+* [ ] Improve Reasons layout/spacing
 
 ### GUI Polish
 
@@ -79,6 +89,8 @@
 * [x] Stabilize analysis layout for varying text lengths
 * [x] Read-only simulated stock price
 * [x] Automatically update displayed stock price
+* [x] Consistent simulation button styling
+* [x] Align ADD button with other controls
 
 ---
 
@@ -110,6 +122,7 @@
 * [x] Update simulated date
 * [ ] Make market indicators change coherently with price movement
 * [ ] Add longer time units / year advancement
+* [ ] Connect simulation state to expert-system analysis
 
 ---
 
@@ -147,6 +160,9 @@
 * [ ] Test market indicator updates
 * [ ] Test portfolio value updates
 * [ ] Test Random Market
+* [ ] Test direction controls
+* [ ] Test AUTO mode
+* [ ] Test RESET
 * [ ] Test longer time advances
 
 ---
@@ -173,15 +189,18 @@
 * [x] **Priority 1:** Connect GUI → CLIPS
 * [x] **Priority 2:** Make recommendations work correctly
 * [x] **Priority 3:** Finish graph + confidence
-* [ ] **Priority 4:** Fix market simulation
-* [ ] **Priority 5:** Integrate portfolio rules
-* [ ] **Priority 6:** Finish buy/sell simulation
-* [ ] **Priority 7:** Test everything
-* [ ] **Priority 8:** Polish and document
+* [ ] **Priority 4:** Make market simulation fully functional
+* [ ] **Priority 5:** Connect simulation → market indicators → analysis
+* [ ] **Priority 6:** Integrate portfolio rules
+* [ ] **Priority 7:** Finish buy/sell simulation
+* [ ] **Priority 8:** Test everything
+* [ ] **Priority 9:** Polish and document
 
 ### Next Session
 
-1. **Decide starting money:** `$100` vs `$1,000`
-2. **Fix market indicators not updating**
-3. **Make ADVANCE feel like an actual week/month instead of one day**
-4. Continue with portfolio
+1. **Finish simulation UI**
+2. **Make market indicators update automatically**
+3. **Make Analysis respond to simulated market state**
+4. **Make ADVANCE feel like an actual week/month**
+5. **Implement RANDOMIZE / RISE / STABLE / FALL / AUTO / RESET**
+6. Continue with portfolio

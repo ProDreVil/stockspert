@@ -1,4 +1,3 @@
-from py_compile import main
 import tkinter as tk
 import random
 from datetime import datetime
@@ -54,9 +53,9 @@ class StockspertGUI:
         main = tk.Frame(self.root, bg=BG_COLOR)
         main.pack(fill="both", expand=True, padx=25, pady=(10, 20))
 
-        main.grid_columnconfigure(0, weight=40)
-        main.grid_columnconfigure(1, weight=25)
-        main.grid_columnconfigure(2, weight=35)
+        main.grid_columnconfigure(0, weight=30)
+        main.grid_columnconfigure(1, weight=30)
+        main.grid_columnconfigure(2, weight=30)
 
         main.grid_rowconfigure(0, weight=2)
         main.grid_rowconfigure(1, weight=1, minsize=180)
@@ -160,9 +159,9 @@ class StockspertGUI:
         current_price = self.market.current_price
 
         self.market_gui["price_var"].set(f"${current_price:.2f}")
-        self.date_label.configure(
-            text=self.market.current_date.strftime("%B %d, %Y")
-        )
+        self.market_gui["pe_value_var"].set(f"{self.market.pe_ratio:.2f}")
+        self.market_gui["pe_var"].set(self.market.get_pe_classification())
+        self.date_label.configure(text=self.market.current_date.strftime("%B %d, %Y"))
         self.graph.update(self.market.candles)
 
         recommendation, rule, confidence = get_recommendation(
@@ -211,6 +210,10 @@ class StockspertGUI:
 
         trend = self.market.get_trend()
         self.market_gui["trend_var"].set(trend)
+
+        self.market_gui["pe_value_var"].set(
+            f"{self.market.pe_ratio:.2f}"
+        )
 
         trend_change = (
             (self.market.candles[-1]["close"] - self.market.candles[-5]["close"])
