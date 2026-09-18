@@ -64,3 +64,35 @@
       (recommendation
          (action sell)
          (rule "SELL-DOWNTREND-NEGATIVE-EARNINGS"))))
+
+
+(defrule sell-stock-uptrend-low-pe-negative-fundamentals
+
+   (stock
+      (trend uptrend)
+      (pe low)
+      (revenue negative)
+      (earnings negative))
+
+   (not (recommendation))
+
+   =>
+
+   (assert
+      (recommendation
+         (action sell)
+         (rule "SELL-UPTREND-LOW-PE-NEGATIVE-FUNDAMENTALS"))))
+
+
+(defrule sell-stock-uptrend-fair-pe-negative-fundamentals
+   (stock
+      (trend uptrend)
+      (pe fair)
+      (revenue negative)
+      (earnings negative))
+   (not (recommendation))
+   =>
+   (assert
+      (recommendation
+         (action sell)
+         (rule "SELL-UPTREND-FAIR-PE-NEGATIVE-FUNDAMENTALS"))))

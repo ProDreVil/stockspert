@@ -61,7 +61,6 @@ def update_reasons(reasons_frame, rule):
         "HOLD-UPTREND-HIGH-PE": [
             ("Uptrend", BUY_COLOR),
             ("High P/E Ratio", SELL_COLOR),
-            ("Positive Revenue Growth", BUY_COLOR),
             ("Positive Earnings Growth", BUY_COLOR),
         ],
 
@@ -91,6 +90,18 @@ def update_reasons(reasons_frame, rule):
             ("Low Trading Volume", HOLD_COLOR),
         ],
 
+        "HOLD-UPTREND-LOW-PE-NEGATIVE-EARNINGS": [
+            ("Uptrend", BUY_COLOR),
+            ("Low P/E Ratio", BUY_COLOR),
+            ("Negative Earnings Growth", SELL_COLOR),
+        ],
+
+        "HOLD-UPTREND-LOW-PE-NEGATIVE-REVENUE": [
+            ("Uptrend", BUY_COLOR),
+            ("Low P/E Ratio", BUY_COLOR),
+            ("Negative Revenue Growth", SELL_COLOR),
+        ],
+
         "SELL-DOWNTREND-NEGATIVE-FUNDAMENTALS": [
             ("Downtrend", SELL_COLOR),
             ("Negative Revenue Growth", SELL_COLOR),
@@ -112,6 +123,20 @@ def update_reasons(reasons_frame, rule):
         "SELL-DOWNTREND-NEGATIVE-EARNINGS": [
             ("Downtrend", SELL_COLOR),
             ("Neutral Revenue Growth", HOLD_COLOR),
+            ("Negative Earnings Growth", SELL_COLOR),
+        ],
+
+        "SELL-UPTREND-LOW-PE-NEGATIVE-FUNDAMENTALS": [
+            ("Uptrend", BUY_COLOR),
+            ("Low P/E Ratio", BUY_COLOR),
+            ("Negative Revenue Growth", SELL_COLOR),
+            ("Negative Earnings Growth", SELL_COLOR),
+        ],
+
+        "SELL-UPTREND-FAIR-PE-NEGATIVE-FUNDAMENTALS": [
+            ("Uptrend", BUY_COLOR),
+            ("Fair P/E Ratio", HOLD_COLOR),
+            ("Negative Revenue Growth", SELL_COLOR),
             ("Negative Earnings Growth", SELL_COLOR),
         ],
     }
@@ -150,7 +175,7 @@ def build_analysis(parent):
     left = tk.Frame(
         content,
         bg=GRAPH_COLOR,
-        width=300
+        width=320
     )
     left.pack(
         side="left",
@@ -200,7 +225,7 @@ def build_analysis(parent):
         side="left",
         fill="both",
         expand=True,
-        padx=(0, 0)
+        padx=(30, 0)
     )
 
     create_label(

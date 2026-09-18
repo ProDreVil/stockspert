@@ -55,7 +55,6 @@
    (stock
       (trend uptrend)
       (pe high)
-      (revenue positive)
       (earnings positive))
 
    (not (recommendation))
@@ -138,3 +137,29 @@
       (recommendation
          (action hold)
          (rule "HOLD-UPTREND-LOW-VOLUME"))))
+
+
+(defrule hold-stock-uptrend-low-pe-negative-earnings
+   (stock
+      (trend uptrend)
+      (pe low)
+      (earnings negative))
+   (not (recommendation))
+   =>
+   (assert
+      (recommendation
+         (action hold)
+         (rule "HOLD-UPTREND-LOW-PE-NEGATIVE-EARNINGS"))))
+
+
+(defrule hold-stock-uptrend-low-pe-negative-revenue
+   (stock
+      (trend uptrend)
+      (pe low)
+      (revenue negative))
+   (not (recommendation))
+   =>
+   (assert
+      (recommendation
+         (action hold)
+         (rule "HOLD-UPTREND-LOW-PE-NEGATIVE-REVENUE"))))

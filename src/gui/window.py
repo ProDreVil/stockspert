@@ -34,12 +34,13 @@ class StockspertGUI:
             self.root.state("zoomed")
         
         self.market = Market(starting_price=random.uniform(500.00, 2000.00))
+        self.simulation_day = 1
         self.build_ui()
         self.graph.update(self.market.candles)
         self.initialize_analysis()
 
     def build_ui(self):
-        self.header, self.date_label = build_header(
+        self.header, self.date_label, self.simulation_day_label = build_header(
             self.root,
             self.market.current_date.strftime("%B %d, %Y")
         )
@@ -206,6 +207,9 @@ class StockspertGUI:
 
     def advance_simulation(self, days=1):
         self.market.advance(days)
+        self.simulation_day += days
+        self.simulation_day_label.configure(text=f"Day {self.simulation_day}")
+
         current_price = self.market.current_price
         previous_price = self.market.candles[-2]["close"]
 
@@ -246,11 +250,7 @@ class StockspertGUI:
             month = int(self.simulation["month_entry"].get() or 0)
         except ValueError:
             return
-        total_days = (
-            day
-            + (week * 7)
-            + (month * 30)
-        )
+        total_days = day + (week * 7) + (month * 30)
         if total_days <= 0:
             return
         self.advance_simulation(total_days)
