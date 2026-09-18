@@ -118,6 +118,13 @@ class Market:
             return "High"
         return "Average"
 
+    def set_market_conditions(self, revenue, earnings, pe_ratio, volume):
+        self.revenue_growth = revenue
+        self.earnings_growth = earnings
+        self.eps = self.current_price / pe_ratio
+        self.pe_ratio = self.current_price / self.eps
+        self.volume = volume
+
     def advance(self, days=1, direction=None):
         for _ in range(days):
             self.state_history.append({

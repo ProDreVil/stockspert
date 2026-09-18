@@ -275,6 +275,61 @@ class StockspertGUI:
         self.simulation_day_label.configure(text="Day 1")
         self.refresh_market_ui()
 
+    def rise_simulation(self):
+        self.market.advance(direction="rise")
+
+        self.market.set_market_conditions(
+            revenue=random.uniform(3.0, 10.0),
+            earnings=random.uniform(3.0, 10.0),
+            pe_ratio=random.uniform(10.0, 20.0),
+            volume=random.uniform(1500001, 2000000)
+        )
+
+        self.simulation_day += 1
+
+        self.simulation_day_label.configure(
+            text=f"Day {self.simulation_day}"
+        )
+
+        self.refresh_market_ui()
+
+    def stable_simulation(self):
+        self.market.advance(direction="stable")
+
+        self.market.set_market_conditions(
+            revenue=random.uniform(-2.0, 2.0),
+            earnings=random.uniform(3.0, 8.0),
+            pe_ratio=random.uniform(15.0, 25.0),
+            volume=random.uniform(800000, 1500000)
+        )
+
+        self.simulation_day += 1
+
+        self.simulation_day_label.configure(
+            text=f"Day {self.simulation_day}"
+        )
+
+        self.refresh_market_ui()
+
+
+    def fall_simulation(self):
+        self.market.advance(direction="fall")
+
+        self.market.set_market_conditions(
+            revenue=random.uniform(-10.0, -3.0),
+            earnings=random.uniform(-10.0, -3.0),
+            pe_ratio=random.uniform(26.0, 35.0),
+            volume=random.uniform(1500001, 2000000)
+        )
+
+        self.simulation_day += 1
+
+        self.simulation_day_label.configure(
+            text=f"Day {self.simulation_day}"
+        )
+
+        self.refresh_market_ui()
+
     def advance_by_input(self):
         try:
             day = int(self.simulation["day_entry"].get() or 0)
@@ -286,32 +341,6 @@ class StockspertGUI:
         if total_days <= 0:
             return
         self.advance_simulation(total_days)
-
-    def rise_simulation(self):
-        self.market.advance(direction="rise")
-        self.simulation_day += 1
-        self.simulation_day_label.configure(
-            text=f"Day {self.simulation_day}"
-        )
-        self.refresh_market_ui()
-
-
-    def stable_simulation(self):
-        self.market.advance(direction="stable")
-        self.simulation_day += 1
-        self.simulation_day_label.configure(
-            text=f"Day {self.simulation_day}"
-        )
-        self.refresh_market_ui()
-
-
-    def fall_simulation(self):
-        self.market.advance(direction="fall")
-        self.simulation_day += 1
-        self.simulation_day_label.configure(
-            text=f"Day {self.simulation_day}"
-        )
-        self.refresh_market_ui()
 
     def run(self):
         self.root.mainloop()
