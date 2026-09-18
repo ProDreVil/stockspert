@@ -83,9 +83,11 @@ def build_simulation(
         on_advance=None,
         on_return=None,
         on_randomize=None,
-        on_reset=None
+        on_reset=None,
+        on_rise=None,
+        on_stable=None,
+        on_fall=None
     ):
-
     frame = create_section(parent, "SIMULATION")
 
     # =========================
@@ -194,6 +196,7 @@ def build_simulation(
     create_simulation_button(
         left_bottom,
         "↗ RISE",
+        command=on_rise,
         bg=RISE_BUTTON_COLOR,
         border_color=RISE_BUTTON_BORDER_COLOR,
         text_color=RISE_BUTTON_BORDER_COLOR
@@ -202,6 +205,7 @@ def build_simulation(
     create_simulation_button(
         left_bottom,
         "→ STABLE",
+        command=on_stable,
         bg=STABLE_BUTTON_COLOR,
         border_color=STABLE_BUTTON_BORDER_COLOR,
         text_color=STABLE_BUTTON_BORDER_COLOR
@@ -210,6 +214,7 @@ def build_simulation(
     create_simulation_button(
         left_bottom,
         "↘ FALL",
+        command=on_fall,
         bg=FALL_BUTTON_COLOR,
         border_color=FALL_BUTTON_BORDER_COLOR,
         text_color=FALL_BUTTON_BORDER_COLOR

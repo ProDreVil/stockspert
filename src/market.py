@@ -32,10 +32,17 @@ class Market:
     def price_history(self):
         return [candle["close"] for candle in self.candles]
 
-    def _create_candle(self, days=1):
+    def _create_candle(self, days=1, direction=None):
         open_price = self.current_price
 
-        change_percent = random.uniform(-1.0, 1.0) * (days ** 0.5)
+        if direction == "rise":
+            change_percent = random.uniform(0.5, 1.5) * (days ** 0.5)
+        elif direction == "fall":
+            change_percent = random.uniform(-1.5, -0.5) * (days ** 0.5)
+        elif direction == "stable":
+            change_percent = random.uniform(-0.3, 0.3) * (days ** 0.5)
+        else:
+            change_percent = random.uniform(-1.0, 1.0) * (days ** 0.5)
         change = open_price * (change_percent / 100)
 
         close_price = max(
@@ -111,7 +118,7 @@ class Market:
             return "High"
         return "Average"
 
-    def advance(self, days=1):
+    def advance(self, days=1, direction=None):
         for _ in range(days):
             self.state_history.append({
                 "current_price": self.current_price,
@@ -128,7 +135,7 @@ class Market:
                 self.state_history.pop(0)
 
             self.current_date += timedelta(days=1)
-            self._create_candle()
+            self._create_candle(direction=direction)
 
         return self.candles[-1]
 
@@ -151,6 +158,22 @@ class Market:
 
 
     def randomize(self):
+        self.state_history.append({
+            "current_price": self.current_price,
+            "eps": self.eps,
+            "pe_ratio": self.pe_ratio,
+            "revenue_growth": self.revenue_growth,
+            "earnings_growth": self.earnings_growth,
+            "volume": self.volume,
+            "current_date": self.current_date,
+            "candles": copy.deepcopy(self.candles)
+        })
+
+        if len(self.state_history) > self.max_history:
+            self.state_history.pop(0)
+
+        self.current_date += timedelta(days=1)
+
         self.current_price = random.uniform(500.00, 2000.00)
         self.eps = self.current_price / random.uniform(8.0, 35.0)
         self.pe_ratio = self.current_price / self.eps
@@ -158,7 +181,6 @@ class Market:
         self.earnings_growth = random.uniform(-10.0, 10.0)
         self.volume = random.uniform(500000, 2000000)
 
-        self.current_date += timedelta(days=1)
         self._create_candle()
 
         if len(self.candles) > 30:

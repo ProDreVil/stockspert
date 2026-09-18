@@ -91,7 +91,10 @@ class StockspertGUI:
             on_advance=self.advance_by_input,
             on_return=self.return_simulation,
             on_randomize=self.randomize_simulation,
-            on_reset=self.reset_simulation
+            on_reset=self.reset_simulation,
+            on_rise=self.rise_simulation,
+            on_stable=self.stable_simulation,
+            on_fall=self.fall_simulation
         )
         self.simulation["frame"].grid(
             row=1,
@@ -283,6 +286,32 @@ class StockspertGUI:
         if total_days <= 0:
             return
         self.advance_simulation(total_days)
+
+    def rise_simulation(self):
+        self.market.advance(direction="rise")
+        self.simulation_day += 1
+        self.simulation_day_label.configure(
+            text=f"Day {self.simulation_day}"
+        )
+        self.refresh_market_ui()
+
+
+    def stable_simulation(self):
+        self.market.advance(direction="stable")
+        self.simulation_day += 1
+        self.simulation_day_label.configure(
+            text=f"Day {self.simulation_day}"
+        )
+        self.refresh_market_ui()
+
+
+    def fall_simulation(self):
+        self.market.advance(direction="fall")
+        self.simulation_day += 1
+        self.simulation_day_label.configure(
+            text=f"Day {self.simulation_day}"
+        )
+        self.refresh_market_ui()
 
     def run(self):
         self.root.mainloop()
