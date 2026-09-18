@@ -36,6 +36,10 @@ class StockspertGUI:
         
         self.market = Market(starting_price=random.uniform(500.00, 2000.00))
         self.simulation_day = 1
+        self.auto_running = False
+        self.auto_job = None
+        self.auto_progress = 0
+
         self.build_ui()
         self.graph.update(self.market.candles)
         self.initialize_analysis()
@@ -94,7 +98,8 @@ class StockspertGUI:
             on_reset=self.reset_simulation,
             on_rise=self.rise_simulation,
             on_stable=self.stable_simulation,
-            on_fall=self.fall_simulation
+            on_fall=self.fall_simulation,
+            on_auto=self.auto_simulation
         )
         self.simulation["frame"].grid(
             row=1,
@@ -329,6 +334,49 @@ class StockspertGUI:
         )
 
         self.refresh_market_ui()
+
+    def auto_simulation(self):
+        if self.auto_running:
+            self.auto_running = False
+
+            if self.auto_job is not None:
+                self.root.after_cancel(self.auto_job)
+                self.auto_job = None
+
+            self.auto_progress = 0
+            self.simulation["auto_button"].button.configure(text="AUTO")
+            return
+
+        self.auto_running = True
+        self.auto_progress = 0
+        self.simulation["auto_button"].button.configure(text="STOP")
+
+        self.update_auto_progress()
+
+    def update_auto_progress(self):
+        if not self.auto_running:
+            return
+
+        try:
+            speed = float(self.simulation["speed_entry"].get() or 1)
+            speed = max(0.2, speed)
+        except ValueError:
+            speed = 1
+
+        self.auto_progress += 100 / (speed * 10)
+        
+        progress_bar = self.simulation["auto_progress"]
+        progress_bar.delete("progress")
+
+        width = 120 * (self.auto_progress / 100)
+
+        progress_bar.create_rectangle(0, 0, width, 8, fill=TEXT_COLOR, outline="", tags="progress")
+
+        if self.auto_progress >= 100:
+            self.auto_progress = 0
+            self.advance_simulation()
+
+        self.auto_job = self.root.after(100, self.update_auto_progress)
 
     def advance_by_input(self):
         try:

@@ -2,7 +2,7 @@ import tkinter as tk
 
 from config import (
     PANEL_COLOR,
-    TEXT_COLOR,
+    INPUT_COLOR,
 
     BUTTON_COLOR,
     BUTTON_BORDER_COLOR,
@@ -73,6 +73,7 @@ def create_simulation_button(
     )
 
     button.pack()
+    border.button = button
 
     return border
 
@@ -86,7 +87,8 @@ def build_simulation(
         on_reset=None,
         on_rise=None,
         on_stable=None,
-        on_fall=None
+        on_fall=None,
+        on_auto=None
     ):
     frame = create_section(parent, "SIMULATION")
 
@@ -225,12 +227,14 @@ def build_simulation(
     auto = tk.Frame(controls_bottom, bg=PANEL_COLOR)
     auto.grid(row=0, column=1, sticky="e", padx=(20, 0))
 
-    create_simulation_button(
+    auto_button = create_simulation_button(
         auto,
         "AUTO",
+        command=on_auto,
         bg=AUTO_BUTTON_COLOR,
         border_color=AUTO_BUTTON_BORDER_COLOR
-    ).pack(side="left", padx=2)
+    )
+    auto_button.pack(side="left", padx=2)
 
     create_label(
         auto,
@@ -243,6 +247,15 @@ def build_simulation(
         width=5
     )
     speed_entry.pack(side="left", padx=2)
+
+    auto_progress = tk.Canvas(
+        auto,
+        width=120,
+        height=8,
+        bg=INPUT_COLOR,
+        highlightthickness=0
+    )
+    auto_progress.pack(side="left", padx=(8, 2))
 
     create_simulation_button(
         auto,
@@ -285,5 +298,8 @@ def build_simulation(
         "week_entry": week_entry,
         "month_entry": month_entry,
         "speed_entry": speed_entry,
-        "cash_entry": cash_entry
+        "cash_entry": cash_entry,
+        "auto_progress": auto_progress,
+        "speed_entry": speed_entry,
+        "auto_button": auto_button,
     }
