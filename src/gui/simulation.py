@@ -1,135 +1,252 @@
 import tkinter as tk
 
-from config import GRAPH_COLOR
+from config import (
+    PANEL_COLOR,
+    TEXT_COLOR,
+
+    BUTTON_COLOR,
+    BUTTON_BORDER_COLOR,
+    BUTTON_TEXT_COLOR,
+
+    RISE_BUTTON_COLOR,
+    RISE_BUTTON_BORDER_COLOR,
+
+    STABLE_BUTTON_COLOR,
+    STABLE_BUTTON_BORDER_COLOR,
+
+    FALL_BUTTON_COLOR,
+    FALL_BUTTON_BORDER_COLOR,
+
+    RESET_BUTTON_COLOR,
+    RESET_BUTTON_BORDER_COLOR,
+    RESET_BUTTON_TEXT_COLOR,
+)
+
 from gui.components import (
-    create_button,
     create_entry,
     create_label,
     create_section,
 )
 
 
+def create_simulation_button(
+    parent,
+    text,
+    command=None,
+    width=10,
+    bg=BUTTON_COLOR,
+    border_color=BUTTON_BORDER_COLOR,
+    text_color=BUTTON_TEXT_COLOR
+):
+    border = tk.Frame(
+        parent,
+        bg=border_color,
+        padx=1,
+        pady=1
+    )
+
+    button = tk.Button(
+        border,
+        text=text,
+        command=command,
+        width=width,
+        bg=bg,
+        fg=text_color,
+        activebackground=bg,
+        activeforeground=text_color,
+        relief="flat",
+        bd=0,
+        highlightthickness=0,
+        font=("Segoe UI", 10, "bold"),
+        padx=6,
+        pady=5
+    )
+
+    button.pack()
+
+    return border
+
+
 def build_simulation(parent, on_next=None, on_advance=None):
-    panel = create_section(parent, "SIMULATION")
 
-    top = tk.Frame(panel, bg=GRAPH_COLOR)
-    top.pack(padx=15, pady=(10, 15))
+    frame = create_section(parent, "SIMULATION")
 
-    create_label(
-        top,
-        "Advance",
-        bg=GRAPH_COLOR
-    ).pack(side="left")
+    # =========================
+    # TOP ROW
+    # =========================
 
-    create_label(
-        top,
-        "Day",
-        bg=GRAPH_COLOR
-    ).pack(side="left", padx=(15, 5))
+    controls = tk.Frame(frame, bg=PANEL_COLOR)
+    controls.pack(fill="x", padx=12, pady=(10, 4))
 
-    day_entry = create_entry(top, width=4)
-    day_entry.pack(side="left")
+    controls.grid_columnconfigure(0, weight=1)
+    controls.grid_columnconfigure(1, weight=1)
 
-    create_label(
-        top,
-        "Week",
-        bg=GRAPH_COLOR
-    ).pack(side="left", padx=(10, 5))
+    # LEFT — NEXT / RANDOMIZE / RETURN
 
-    week_entry = create_entry(top, width=4)
-    week_entry.pack(side="left")
+    left_top = tk.Frame(controls, bg=PANEL_COLOR)
+    left_top.grid(row=0, column=0, sticky="w")
 
-    create_label(
-        top,
-        "Month",
-        bg=GRAPH_COLOR
-    ).pack(side="left", padx=(10, 5))
-
-    month_entry = create_entry(top, width=4)
-    month_entry.pack(side="left")
-
-    actions = tk.Frame(
-        panel,
-        bg=GRAPH_COLOR
-    )
-    actions.pack(pady=(5, 8))
-
-    create_button(
-        actions,
+    create_simulation_button(
+        left_top,
         "NEXT",
-        command=on_next,
-        width=12
-    ).pack(side="left", padx=4)
+        command=on_next
+    ).pack(side="left", padx=2)
 
-    create_button(
-        actions,
+    create_simulation_button(
+        left_top,
+        "RANDOMIZE"
+    ).pack(side="left", padx=2)
+
+    create_simulation_button(
+        left_top,
+        "RETURN"
+    ).pack(side="left", padx=2)
+
+    # RIGHT — ADVANCE
+
+    advance = tk.Frame(controls, bg=PANEL_COLOR)
+    advance.grid(row=0, column=1, sticky="e")
+
+    create_simulation_button(
+        advance,
         "ADVANCE",
-        command=on_advance,
-        width=12
-    ).pack(side="left", padx=4)
+        command=on_advance
+    ).pack(side="left", padx=2)
 
-    create_button(
-        actions,
-        "RANDOMIZE",
-        width=12
-    ).pack(side="left", padx=4)
+    create_label(
+        advance,
+        "DAY:",
+        font=("Segoe UI", 9, "bold")
+    ).pack(side="left", padx=(8, 3))
 
-    direction = tk.Frame(
-        panel,
-        bg=GRAPH_COLOR
+    day_entry = create_entry(
+        advance,
+        width=5
     )
-    direction.pack(pady=(0, 8))
+    day_entry.pack(side="left", padx=2)
 
-    create_button(
-        direction,
+    create_label(
+        advance,
+        "WEEK:",
+        font=("Segoe UI", 9, "bold")
+    ).pack(side="left", padx=(8, 3))
+
+    week_entry = create_entry(
+        advance,
+        width=5
+    )
+    week_entry.pack(side="left", padx=2)
+
+    create_label(
+        advance,
+        "MONTH:",
+        font=("Segoe UI", 9, "bold")
+    ).pack(side="left", padx=(8, 3))
+
+    month_entry = create_entry(
+        advance,
+        width=5
+    )
+    month_entry.pack(side="left", padx=2)
+
+    # =========================
+    # SECOND ROW
+    # =========================
+
+    controls_bottom = tk.Frame(frame, bg=PANEL_COLOR)
+    controls_bottom.pack(fill="x", padx=12, pady=(4, 10))
+
+    controls_bottom.grid_columnconfigure(0, weight=1)
+    controls_bottom.grid_columnconfigure(1, weight=1)
+
+    # LEFT — RISE / STABLE / FALL
+
+    left_bottom = tk.Frame(controls_bottom, bg=PANEL_COLOR)
+    left_bottom.grid(row=0, column=0, sticky="w")
+
+    create_simulation_button(
+        left_bottom,
         "↗ RISE",
-        width=12
-    ).pack(side="left", padx=4)
+        bg=RISE_BUTTON_COLOR,
+        border_color=RISE_BUTTON_BORDER_COLOR,
+        text_color=RISE_BUTTON_BORDER_COLOR
+    ).pack(side="left", padx=2)
 
-    create_button(
-        direction,
+    create_simulation_button(
+        left_bottom,
         "→ STABLE",
-        width=12
-    ).pack(side="left", padx=4)
+        bg=STABLE_BUTTON_COLOR,
+        border_color=STABLE_BUTTON_BORDER_COLOR,
+        text_color=STABLE_BUTTON_BORDER_COLOR
+    ).pack(side="left", padx=2)
 
-    create_button(
-        direction,
+    create_simulation_button(
+        left_bottom,
         "↘ FALL",
-        width=12
-    ).pack(side="left", padx=4)
+        bg=FALL_BUTTON_COLOR,
+        border_color=FALL_BUTTON_BORDER_COLOR,
+        text_color=FALL_BUTTON_BORDER_COLOR
+    ).pack(side="left", padx=2)
 
-    cash = tk.Frame(
-        panel,
-        bg=GRAPH_COLOR
+    # RIGHT — AUTO / RESET
+
+    auto = tk.Frame(controls_bottom, bg=PANEL_COLOR)
+    auto.grid(row=0, column=1, sticky="e", padx=(0, 82))
+
+    create_simulation_button(
+        auto,
+        "AUTO"
+    ).pack(side="left", padx=2)
+
+    create_label(
+        auto,
+        "SPEED:",
+        font=("Segoe UI", 9, "bold")
+    ).pack(side="left", padx=(8, 3))
+
+    speed_entry = create_entry(
+        auto,
+        width=5
     )
-    cash.pack(pady=(0, 10))
+    speed_entry.pack(side="left", padx=2)
+
+    create_simulation_button(
+        auto,
+        "RESET",
+        bg=RESET_BUTTON_COLOR,
+        border_color=RESET_BUTTON_BORDER_COLOR,
+        text_color=RESET_BUTTON_TEXT_COLOR
+    ).pack(side="left", padx=(8, 2))
+
+    # =========================
+    # ADD CASH
+    # =========================
+
+    cash = tk.Frame(frame, bg=PANEL_COLOR)
+    cash.pack(fill="x", padx=12, pady=(0, 10))
 
     create_label(
         cash,
-        "Add Cash",
-        bg=GRAPH_COLOR
-    ).pack(side="left")
+        "ADD CASH:",
+        font=("Segoe UI", 10, "bold")
+    ).pack(side="left", padx=(0, 8))
 
-    create_entry(
+    cash_entry = create_entry(
         cash,
-        width=10
-    ).pack(side="left", padx=5)
+        width=12
+    )
+    cash_entry.pack(side="left", padx=2)
 
-    create_button(
+    create_simulation_button(
         cash,
-        "ADD",
-        width=8
-    ).pack(side="left", padx=4)
-
-    create_button(
-        cash,
-        "RESET",
-        width=8
-    ).pack(side="left", padx=4)
+        "ADD"
+    ).pack(side="left", padx=26)
 
     return {
-        "frame": panel,
+        "frame": frame,
         "day_entry": day_entry,
         "week_entry": week_entry,
-        "month_entry": month_entry
+        "month_entry": month_entry,
+        "speed_entry": speed_entry,
+        "cash_entry": cash_entry
     }

@@ -182,6 +182,15 @@ class StockspertGUI:
         trend = self.market.get_trend()
         self.market_gui["trend_var"].set(trend)
 
+        trend_change = (
+            (self.market.candles[-1]["close"] - self.market.candles[-5]["close"])
+            / self.market.candles[-5]["close"]
+        ) * 100
+
+        self.market_gui["trend_change_var"].set(
+            f"{trend_change:+.2f}%"
+        )
+
         self.date_label.configure(
             text=self.market.current_date.strftime("%B %d, %Y")
         )
