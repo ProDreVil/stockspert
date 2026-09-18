@@ -9,6 +9,7 @@ class Market:
         self.current_price = starting_price
         self.eps = self.current_price / random.uniform(8.0, 35.0)
         self.pe_ratio = self.current_price / self.eps
+        self.revenue_growth = random.uniform(-10.0, 10.0)
 
         self.current_date = datetime.now()
         self.candles = []
@@ -59,6 +60,7 @@ class Market:
         self.candles.append(candle)
         self.current_price = close_price
         self.pe_ratio = self.current_price / self.eps
+        self.revenue_growth += random.uniform(-1.0, 1.0)
         return candle
 
     def get_trend(self):
@@ -82,6 +84,13 @@ class Market:
         if self.pe_ratio > 25:
             return "High"
         return "Fair"
+
+    def get_revenue_classification(self):
+        if self.revenue_growth > 2:
+            return "Positive"
+        if self.revenue_growth < -2:
+            return "Negative"
+        return "Neutral"
 
     def advance(self, days=1):
         self.current_date += timedelta(days=days)

@@ -211,10 +211,6 @@ class StockspertGUI:
         trend = self.market.get_trend()
         self.market_gui["trend_var"].set(trend)
 
-        self.market_gui["pe_value_var"].set(
-            f"{self.market.pe_ratio:.2f}"
-        )
-
         trend_change = (
             (self.market.candles[-1]["close"] - self.market.candles[-5]["close"])
             / self.market.candles[-5]["close"]
@@ -222,6 +218,17 @@ class StockspertGUI:
 
         self.market_gui["trend_change_var"].set(
             f"{trend_change:+.2f}%"
+        )
+
+        self.market_gui["pe_value_var"].set(
+            f"{self.market.pe_ratio:.2f}"
+        )
+
+        self.market_gui["revenue_value_var"].set(
+            f"{self.market.revenue_growth:+.2f}%"
+        )
+        self.market_gui["revenue_var"].set(
+            self.market.get_revenue_classification()
         )
 
         self.refresh_market_ui()
