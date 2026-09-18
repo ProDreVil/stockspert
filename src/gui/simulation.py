@@ -93,7 +93,7 @@ def build_simulation(
     frame = create_section(parent, "SIMULATION")
 
     # =========================
-    # TOP ROW
+    # FIRST ROW
     # =========================
 
     controls = tk.Frame(frame, bg=PANEL_COLOR)
@@ -101,8 +101,6 @@ def build_simulation(
 
     controls.grid_columnconfigure(0, weight=0)
     controls.grid_columnconfigure(1, weight=0)
-
-    # LEFT — NEXT / RANDOMIZE / RETURN
 
     left_top = tk.Frame(controls, bg=PANEL_COLOR)
     left_top.grid(row=0, column=0, sticky="w")
@@ -130,8 +128,6 @@ def build_simulation(
         bg=RETURN_BUTTON_COLOR,
         border_color=RETURN_BUTTON_BORDER_COLOR
     ).pack(side="left", padx=2)
-
-    # RIGHT — ADVANCE
 
     advance = tk.Frame(controls, bg=PANEL_COLOR)
     advance.grid(row=0, column=1, sticky="e", padx=(20, 0))
@@ -190,8 +186,6 @@ def build_simulation(
     controls_bottom.grid_columnconfigure(0, weight=0)
     controls_bottom.grid_columnconfigure(1, weight=0)
 
-    # LEFT — RISE / STABLE / FALL
-
     left_bottom = tk.Frame(controls_bottom, bg=PANEL_COLOR)
     left_bottom.grid(row=0, column=0, sticky="w")
 
@@ -221,8 +215,6 @@ def build_simulation(
         border_color=FALL_BUTTON_BORDER_COLOR,
         text_color=FALL_BUTTON_BORDER_COLOR
     ).pack(side="left", padx=2)
-
-    # RIGHT — AUTO / RESET
 
     auto = tk.Frame(controls_bottom, bg=PANEL_COLOR)
     auto.grid(row=0, column=1, sticky="e", padx=(20, 0))
@@ -257,40 +249,46 @@ def build_simulation(
     )
     auto_progress.pack(side="left", padx=(8, 2))
 
-    create_simulation_button(
-        auto,
-        "RESET",
-        command=on_reset,
-        bg=RESET_BUTTON_COLOR,
-        border_color=RESET_BUTTON_BORDER_COLOR,
-        text_color=RESET_BUTTON_TEXT_COLOR
-    ).pack(side="left", padx=(50, 2))
-
     # =========================
-    # ADD CASH
+    # THIRD ROW
     # =========================
 
     cash = tk.Frame(frame, bg=PANEL_COLOR)
     cash.pack(fill="x", padx=12, pady=(0, 10))
 
+    cash.grid_columnconfigure(0, weight=0)
+    cash.grid_columnconfigure(1, weight=0)
+
+    cash_left = tk.Frame(cash, bg=PANEL_COLOR)
+    cash_left.grid(row=0, column=0, sticky="w")
+
     create_label(
-        cash,
+        cash_left,
         "ADD CASH:",
         font=("Segoe UI", 10, "bold")
-    ).pack(side="left", padx=(0, 8))
+    ).pack(side="left", padx=(0, 7))
 
     cash_entry = create_entry(
-        cash,
+        cash_left,
         width=12
     )
-    cash_entry.pack(side="left", padx=2)
+    cash_entry.pack(side="left", padx=(0, 2))
 
     create_simulation_button(
-        cash,
+        cash_left,
         "ADD",
         bg=ADD_BUTTON_COLOR,
         border_color=ADD_BUTTON_BORDER_COLOR
-    ).pack(side="left", padx=26)
+    ).pack(side="left", padx=(30, 24))
+
+    create_simulation_button(
+        cash,
+        "RESET",
+        command=on_reset,
+        bg=RESET_BUTTON_COLOR,
+        border_color=RESET_BUTTON_BORDER_COLOR,
+        text_color=RESET_BUTTON_TEXT_COLOR
+    ).grid(row=0, column=1, sticky="n", pady=0)
 
     return {
         "frame": frame,
