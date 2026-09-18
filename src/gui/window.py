@@ -231,6 +231,13 @@ class StockspertGUI:
             self.market.get_revenue_classification()
         )
 
+        self.market_gui["earnings_value_var"].set(
+            f"{self.market.earnings_growth:+.2f}%"
+        )
+        self.market_gui["earnings_var"].set(
+            self.market.get_earnings_classification()
+        )
+
         self.refresh_market_ui()
 
     def advance_by_input(self):

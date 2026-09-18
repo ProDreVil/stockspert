@@ -29,12 +29,12 @@
             ├── simulation.py
             ├── stocks.py
             ├── window.py
+        ├── account.py
         ├── clips.py
         ├── confidence.py
         ├── config.py
         ├── main.py
         ├── market.py
-        ├── portfolio.py
         ├── test.py
     ├── .gitignore
     ├── LICENSE
