@@ -22,6 +22,7 @@ from gui.analysis import (
     update_reasons,
 )
 from gui.graph import StockGraph
+from market import Market
 
 
 class StockspertGUI:
@@ -88,7 +89,9 @@ class StockspertGUI:
             main,
             on_next=self.advance_simulation,
             on_advance=self.advance_by_input,
-            on_return=self.return_simulation
+            on_return=self.return_simulation,
+            on_randomize=self.randomize_simulation,
+            on_reset=self.reset_simulation
         )
         self.simulation["frame"].grid(
             row=1,
@@ -255,6 +258,18 @@ class StockspertGUI:
             text=f"Day {self.simulation_day}"
         )
 
+        self.refresh_market_ui()
+
+    def randomize_simulation(self):
+        self.market.randomize()
+        self.simulation_day += 1
+        self.simulation_day_label.configure(text=f"Day {self.simulation_day}")
+        self.refresh_market_ui()
+        
+    def reset_simulation(self):
+        self.market = Market()
+        self.simulation_day = 1
+        self.simulation_day_label.configure(text="Day 1")
         self.refresh_market_ui()
 
     def advance_by_input(self):

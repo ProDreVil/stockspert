@@ -148,3 +148,20 @@ class Market:
         self.candles = state["candles"]
 
         return True
+
+
+    def randomize(self):
+        self.current_price = random.uniform(500.00, 2000.00)
+        self.eps = self.current_price / random.uniform(8.0, 35.0)
+        self.pe_ratio = self.current_price / self.eps
+        self.revenue_growth = random.uniform(-10.0, 10.0)
+        self.earnings_growth = random.uniform(-10.0, 10.0)
+        self.volume = random.uniform(500000, 2000000)
+
+        self.current_date += timedelta(days=1)
+        self._create_candle()
+
+        if len(self.candles) > 30:
+            self.candles.pop(0)
+
+        return self.candles[-1]

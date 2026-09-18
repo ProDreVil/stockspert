@@ -77,7 +77,14 @@ def create_simulation_button(
     return border
 
 
-def build_simulation(parent, on_next=None, on_advance=None, on_return=None):
+def build_simulation(
+        parent,
+        on_next=None,
+        on_advance=None,
+        on_return=None,
+        on_randomize=None,
+        on_reset=None
+    ):
 
     frame = create_section(parent, "SIMULATION")
 
@@ -107,6 +114,7 @@ def build_simulation(parent, on_next=None, on_advance=None, on_return=None):
     create_simulation_button(
         left_top,
         "RANDOMIZE",
+        command=on_randomize,
         bg=RANDOMIZE_BUTTON_COLOR,
         border_color=RANDOMIZE_BUTTON_BORDER_COLOR
     ).pack(side="left", padx=2)
@@ -234,6 +242,7 @@ def build_simulation(parent, on_next=None, on_advance=None, on_return=None):
     create_simulation_button(
         auto,
         "RESET",
+        command=on_reset,
         bg=RESET_BUTTON_COLOR,
         border_color=RESET_BUTTON_BORDER_COLOR,
         text_color=RESET_BUTTON_TEXT_COLOR
