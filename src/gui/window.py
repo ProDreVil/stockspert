@@ -154,14 +154,44 @@ class StockspertGUI:
         )
 
     def initialize_analysis(self):
-        self.apply_market_changes(
-            "100.00",
-            "Uptrend",
-            "Low",
-            "Positive",
-            "Positive",
-            "Average",
+        self.refresh_market_ui()
+
+    def refresh_market_ui(self):
+        current_price = self.market.current_price
+
+        self.market_gui["price_var"].set(f"${current_price:.2f}")
+        self.date_label.configure(
+            text=self.market.current_date.strftime("%B %d, %Y")
         )
+        self.graph.update(self.market.candles)
+
+        recommendation, rule, confidence = get_recommendation(
+            self.market_gui["trend_var"].get().lower(),
+            self.market_gui["pe_var"].get().lower(),
+            self.market_gui["revenue_var"].get().lower(),
+            self.market_gui["earnings_var"].get().lower(),
+            self.market_gui["volume_var"].get().lower(),
+            self.market.price_history
+        )
+
+        colors = {
+            "BUY": BUY_COLOR,
+            "HOLD": HOLD_COLOR,
+            "SELL": SELL_COLOR
+        }
+
+        self.analysis["recommendation"].configure(
+            text=recommendation,
+            fg=colors.get(recommendation, TEXT_COLOR)
+        )
+        self.analysis["confidence"].configure(
+            text=f"Confidence: {confidence}%"
+        )
+        self.analysis["rule"].configure(
+            text=f"Rule Fired: {rule}"
+        )
+
+        update_reasons(self.analysis["reasons"], rule)
 
     def advance_simulation(self, days=1):
         self.market.advance(days)
@@ -191,11 +221,7 @@ class StockspertGUI:
             f"{trend_change:+.2f}%"
         )
 
-        self.date_label.configure(
-            text=self.market.current_date.strftime("%B %d, %Y")
-        )
-
-        self.graph.update(self.market.candles)
+        self.refresh_market_ui()
 
     def advance_by_input(self):
         try:
