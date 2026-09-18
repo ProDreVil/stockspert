@@ -93,5 +93,8 @@ class Market:
         return "Neutral"
 
     def advance(self, days=1):
-        self.current_date += timedelta(days=days)
-        return self._create_candle(days)
+        for _ in range(days):
+            self.current_date += timedelta(days=1)
+            self._create_candle()
+
+        return self.candles[-1]
