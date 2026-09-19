@@ -10,9 +10,9 @@ class Market:
         self.current_price = starting_price
         self.eps = self.current_price / random.uniform(8.0, 35.0)
         self.pe_ratio = self.current_price / self.eps
-        self.revenue_growth = random.uniform(-10.0, 10.0)
-        self.earnings_growth = random.uniform(-10.0, 10.0)
-        self.volume = random.uniform(500000, 2000000)
+        self.revenue_growth = random.uniform(-3.0, 3.0)
+        self.earnings_growth = random.uniform(-3.0, 3.0)
+        self.volume = random.uniform(800000, 1500000)
 
         self.current_date = datetime.now()
         self.candles = []
@@ -42,7 +42,7 @@ class Market:
         elif direction == "stable":
             change_percent = random.uniform(-0.3, 0.3) * (days ** 0.5)
         else:
-            change_percent = random.uniform(-1.0, 1.0) * (days ** 0.5)
+            change_percent = random.uniform(-1.5, 1.5) * (days ** 0.5)
         change = open_price * (change_percent / 100)
 
         close_price = max(
@@ -72,8 +72,8 @@ class Market:
         self.candles.append(candle)
         self.current_price = close_price
         self.pe_ratio = self.current_price / self.eps
-        self.revenue_growth += random.uniform(-1.0, 1.0)
-        self.earnings_growth += random.uniform(-1.0, 1.0)
+        self.revenue_growth += (random.uniform(-2.0, 2.0) - (self.revenue_growth * 0.2))
+        self.earnings_growth += (random.uniform(-2.0, 2.0) - (self.earnings_growth * 0.2))
         self.volume = random.uniform(500000, 2000000)
         return candle
 
@@ -86,9 +86,9 @@ class Market:
             (latest_price - oldest_price)
             / oldest_price
         ) * 100
-        if change_percent > 1.5:
+        if change_percent > 1.0:
             return "Uptrend"
-        if change_percent < -1.5:
+        if change_percent < -1.0:
             return "Downtrend"
         return "Sideways"
 
@@ -184,8 +184,8 @@ class Market:
         self.current_price = random.uniform(500.00, 2000.00)
         self.eps = self.current_price / random.uniform(8.0, 35.0)
         self.pe_ratio = self.current_price / self.eps
-        self.revenue_growth = random.uniform(-10.0, 10.0)
-        self.earnings_growth = random.uniform(-10.0, 10.0)
+        self.revenue_growth = random.uniform(-5.0, 5.0)
+        self.earnings_growth = random.uniform(-5.0, 5.0)
         self.volume = random.uniform(500000, 2000000)
 
         self._create_candle()

@@ -19,6 +19,7 @@ def get_recommendation(
     lowest = min(price_history)
     highest = max(price_history)
     current = price_history[-1]
+    price_history = price_history[-10:]
 
     price_range = highest - lowest
 

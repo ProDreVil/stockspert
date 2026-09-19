@@ -23,11 +23,12 @@ from gui.analysis import (
 )
 from gui.graph import StockGraph
 from market import Market
+from account import Account
 
 
 class StockspertGUI:
     def __init__(self, starting_price=None):
-        with open("docs/simulation_record.txt", "w", encoding="utf-8") as file:
+        with open("docs/record.txt", "w", encoding="utf-8") as file:
             file.write("")
         self.root = tk.Tk()
         self.root.title(WINDOW_TITLE)
@@ -37,6 +38,8 @@ class StockspertGUI:
             self.root.state("zoomed")
         
         self.market = Market(starting_price=random.uniform(500.00, 2000.00))
+        self.account = Account()
+
         self.simulation_day = 1
         self.auto_running = False
         self.auto_job = None
@@ -86,9 +89,14 @@ class StockspertGUI:
             padx=5
         )
 
-        build_portfolio(main).grid(
-            row=0, column=2,
-            sticky="nsew", padx=(5, 0)
+        self.portfolio = build_portfolio(main)
+        self.portfolio["buy_button"].config(command=self.buy_stock)
+        self.portfolio["sell_button"].config(command=self.sell_stock)
+        self.portfolio["frame"].grid(
+            row=0,
+            column=2,
+            sticky="nsew",
+            padx=(5, 0)
         )
 
         self.simulation = build_simulation(
@@ -202,7 +210,7 @@ class StockspertGUI:
             history
         )
 
-        with open("docs/simulation_record.txt", "a", encoding="utf-8") as file:
+        with open("docs/record.txt", "a", encoding="utf-8") as file:
             file.write("========== SIMULATION RECORD ==========\n")
 
             file.write(f"Current Price : ${self.market.current_price:.2f}\n")
@@ -247,6 +255,7 @@ class StockspertGUI:
         )
 
         update_reasons(self.analysis["reasons"], rule)
+        self.update_portfolio_ui()
 
     def advance_simulation(self, days=1):
         self.market.advance(days)
@@ -420,6 +429,61 @@ class StockspertGUI:
         if total_days <= 0:
             return
         self.advance_simulation(total_days)
+
+    def update_portfolio_ui(self):
+        current_price = self.market.candles[-1]["close"]
+
+        self.portfolio["cash"].config(
+            text=f"${self.account.cash:,.2f}"
+        )
+
+        self.portfolio["shares"].config(
+            text=str(self.account.shares)
+        )
+
+        self.portfolio["invested"].config(
+            text=f"${self.account.invested:,.2f}"
+        )
+
+        value = self.account.get_value(current_price)
+        profit_loss = self.account.get_profit_loss(current_price)
+        return_percent = self.account.get_return(current_price)
+
+        self.portfolio["value"].config(
+            text=f"${value:,.2f}"
+        )
+
+        self.portfolio["pl"].config(
+            text=f"P/L        ${profit_loss:,.2f}"
+        )
+
+        self.portfolio["return"].config(
+            text=f"Return     {return_percent:.2f}%"
+        )
+
+    def buy_stock(self):
+        try:
+            quantity = int(self.portfolio["buy_entry"].get())
+        except ValueError:
+            return
+
+        current_price = self.market.candles[-1]["close"]
+
+        if self.account.buy(current_price, quantity):
+            self.portfolio["buy_entry"].delete(0, tk.END)
+        self.update_portfolio_ui()
+
+    def sell_stock(self):
+        try:
+            quantity = int(self.portfolio["sell_entry"].get())
+        except ValueError:
+            return
+
+        current_price = self.market.candles[-1]["close"]
+
+        if self.account.sell(current_price, quantity):
+            self.portfolio["sell_entry"].delete(0, tk.END)
+            self.update_portfolio_ui()
 
     def run(self):
         self.root.mainloop()

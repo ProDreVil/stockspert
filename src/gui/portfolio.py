@@ -14,15 +14,24 @@ def build_portfolio(parent):
     panel = create_section(parent, "PORTFOLIO")
 
     stats = [
-        ("Cash", "$10,000"),
+        ("Cash", "$10,000.00"),
         ("Shares", "0"),
         ("Invested", "$0.00"),
-        ("Value", "$10,000"),
+        ("Value", "$10,000.00"),
     ]
 
+    stat_labels = {}
+
     for label, value in stats:
-        row = tk.Frame(panel, bg=GRAPH_COLOR)
-        row.pack(fill="x", padx=15, pady=2)
+        row = tk.Frame(
+            panel,
+            bg=GRAPH_COLOR
+        )
+        row.pack(
+            fill="x",
+            padx=15,
+            pady=2
+        )
 
         create_label(
             row,
@@ -31,29 +40,34 @@ def build_portfolio(parent):
             bg=GRAPH_COLOR
         ).pack(side="left")
 
-        create_label(
+        value_label = create_label(
             row,
             value,
             bg=GRAPH_COLOR
-        ).pack(side="right")
+        )
+        value_label.pack(side="right")
 
-    create_label(
+        stat_labels[label] = value_label
+
+    pl_label = create_label(
         panel,
         "P/L        $0.00",
         color=SECONDARY_TEXT,
         bg=GRAPH_COLOR
-    ).pack(
+    )
+    pl_label.pack(
         anchor="w",
         padx=15,
         pady=(12, 2)
     )
 
-    create_label(
+    return_label = create_label(
         panel,
         "Return     0.00%",
         color=SECONDARY_TEXT,
         bg=GRAPH_COLOR
-    ).pack(
+    )
+    return_label.pack(
         anchor="w",
         padx=15
     )
@@ -74,18 +88,20 @@ def build_portfolio(parent):
         bg=GRAPH_COLOR
     ).pack(side="left")
 
-    create_entry(
+    buy_entry = create_entry(
         buy,
         width=5
-    ).pack(
+    )
+    buy_entry.pack(
         side="left",
         padx=5
     )
 
-    create_button(
+    buy_button = create_button(
         buy,
         "BUY"
-    ).pack(side="left")
+    )
+    buy_button.pack(side="left")
 
     sell = tk.Frame(
         panel,
@@ -103,17 +119,31 @@ def build_portfolio(parent):
         bg=GRAPH_COLOR
     ).pack(side="left")
 
-    create_entry(
+    sell_entry = create_entry(
         sell,
         width=5
-    ).pack(
+    )
+    sell_entry.pack(
         side="left",
         padx=5
     )
 
-    create_button(
+    sell_button = create_button(
         sell,
         "SELL"
-    ).pack(side="left")
+    )
+    sell_button.pack(side="left")
 
-    return panel
+    return {
+        "frame": panel,
+        "cash": stat_labels["Cash"],
+        "shares": stat_labels["Shares"],
+        "invested": stat_labels["Invested"],
+        "value": stat_labels["Value"],
+        "pl": pl_label,
+        "return": return_label,
+        "buy_entry": buy_entry,
+        "buy_button": buy_button,
+        "sell_entry": sell_entry,
+        "sell_button": sell_button,
+    }

@@ -92,7 +92,7 @@ def update_reasons(reasons_frame, rule):
             ("Low P/E Ratio", BUY_COLOR),
             ("Positive Revenue Growth", BUY_COLOR),
             ("Positive Earnings Growth", BUY_COLOR),
-            ("Low Trading Volume", HOLD_COLOR),
+            ("Low Volume", HOLD_COLOR),
         ],
 
         "HOLD-UPTREND-LOW-PE-NEGATIVE-EARNINGS": [
@@ -114,17 +114,22 @@ def update_reasons(reasons_frame, rule):
             ("Positive Earnings Growth", BUY_COLOR),
         ],
 
-        "HOLD-UPTREND-HIGH-PE-NEGATIVE-EARNINGS": [
-            ("Uptrend", BUY_COLOR),
-            ("High P/E Ratio", SELL_COLOR),
-            ("Positive Revenue Growth", BUY_COLOR),
-            ("Negative Earnings Growth", SELL_COLOR),
-        ],
-
         "HOLD-DOWNTREND-NEGATIVE-REVENUE": [
             ("Downtrend", SELL_COLOR),
             ("Negative Revenue Growth", SELL_COLOR),
             ("Positive Earnings Growth", BUY_COLOR),
+        ],
+
+        "HOLD-UPTREND-FAIR-PE-NEGATIVE-EARNINGS": [
+            ("Uptrend", BUY_COLOR),
+            ("Fair P/E Ratio", HOLD_COLOR),
+            ("Negative Earnings Growth", SELL_COLOR),
+        ],
+
+        "HOLD-UPTREND-HIGH-PE-NEGATIVE-EARNINGS": [
+            ("Uptrend", BUY_COLOR),
+            ("High P/E Ratio", SELL_COLOR),
+            ("Negative Earnings Growth", SELL_COLOR),
         ],
 
         "SELL-DOWNTREND-NEGATIVE-FUNDAMENTALS": [
