@@ -201,7 +201,8 @@ def update_reasons(reasons_frame, rule):
             f"• {reason}",
             color=color,
             bg=GRAPH_COLOR,
-            justify="left"
+            justify="left",
+            font=("Consolas", 10, "bold")
         ).pack(
             anchor="w"
         )
@@ -238,7 +239,7 @@ def build_analysis(parent):
     recommendation = create_label(
         left,
         "BUY",
-        font=("Segoe UI", 24, "bold"),
+        font=("Consolas", 24, "bold"),
         color=BUY_COLOR,
         bg=GRAPH_COLOR
     )
@@ -251,7 +252,8 @@ def build_analysis(parent):
         left,
         "Confidence: 69%",
         color=SECONDARY_TEXT,
-        bg=GRAPH_COLOR
+        bg=GRAPH_COLOR,
+        font=("Consolas", 10, "bold")
     )
     confidence.pack(
         anchor="w",
@@ -263,6 +265,7 @@ def build_analysis(parent):
         "Rule Fired: BUY-UPTREND-LOW-PE",
         color=SECONDARY_TEXT,
         bg=GRAPH_COLOR,
+        font=("Consolas", 10, "bold")
     )
     rule.pack(
         anchor="w",
@@ -284,7 +287,8 @@ def build_analysis(parent):
         right,
         "Reasons:",
         color=SECONDARY_TEXT,
-        bg=GRAPH_COLOR
+        bg=GRAPH_COLOR,
+        font=("Segoe UI", 10, "bold")
     ).pack(
         anchor="w",
         pady=(10, 8)
