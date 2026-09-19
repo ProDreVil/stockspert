@@ -109,7 +109,8 @@ class StockspertGUI:
             on_rise=self.rise_simulation,
             on_stable=self.stable_simulation,
             on_fall=self.fall_simulation,
-            on_auto=self.auto_simulation
+            on_auto=self.auto_simulation,
+            on_add_cash=self.add_cash
         )
         self.simulation["frame"].grid(
             row=1,
@@ -493,6 +494,21 @@ class StockspertGUI:
 
         if self.account.sell(current_price, quantity):
             self.portfolio["quantity_entry"].delete(0, tk.END)
+
+        self.update_portfolio_ui()
+
+    def add_cash(self):
+
+        try:
+            amount = float(self.simulation["cash_entry"].get())
+        except ValueError:
+            return
+
+        if amount <= 0:
+            return
+
+        self.account.cash += amount
+        self.simulation["cash_entry"].delete(0, tk.END)
 
         self.update_portfolio_ui()
 

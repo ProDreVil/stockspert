@@ -85,7 +85,8 @@ def build_simulation(
         on_rise=None,
         on_stable=None,
         on_fall=None,
-        on_auto=None
+        on_auto=None,
+        on_add_cash=None
     ):
 
     frame = create_section(parent, "SIMULATION")
@@ -422,12 +423,15 @@ def build_simulation(
         padx=(0, 2)
     )
 
-    create_simulation_button(
+    add_cash_button = create_simulation_button(
         cash_left,
         "ADD",
+        command=on_add_cash,
         bg=ADD_BUTTON_COLOR,
         border_color=ADD_BUTTON_BORDER_COLOR
-    ).pack(
+    )
+
+    add_cash_button.pack(
         side="left",
         padx=(30, 24)
     )
