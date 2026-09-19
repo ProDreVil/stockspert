@@ -16,6 +16,22 @@ def get_recommendation(
     volume,
     price_history
 ):
+    lowest = min(price_history)
+    highest = max(price_history)
+    current = price_history[-1]
+
+    price_range = highest - lowest
+
+    low_boundary = lowest + price_range * 0.33
+    high_boundary = lowest + price_range * 0.67
+
+    if current <= low_boundary:
+        price_level = "low"
+    elif current >= high_boundary:
+        price_level = "high"
+    else:
+        price_level = "fair"
+
     clips_file = str(CLIPS_FILE).replace("\\", "/")
     templates_file = str(CLIPS_FILE.parent / "templates.CLP").replace("\\", "/")
     output_file = str(CLIPS_FILE.parent / "output.CLP").replace("\\", "/")
@@ -38,7 +54,8 @@ def get_recommendation(
             (pe {pe})
             (revenue {revenue})
             (earnings {earnings})
-            (volume {volume})))
+            (volume {volume})
+            (price {price_level})))
         (run)
         (exit)
         """

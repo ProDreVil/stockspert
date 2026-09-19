@@ -3,7 +3,8 @@
    (slot pe)
    (slot revenue)
    (slot earnings)
-   (slot volume))
+   (slot volume)
+   (slot price))
 
 (deftemplate recommendation
    (slot action)

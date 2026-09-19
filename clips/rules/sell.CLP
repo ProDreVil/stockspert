@@ -96,3 +96,17 @@
       (recommendation
          (action sell)
          (rule "SELL-UPTREND-FAIR-PE-NEGATIVE-FUNDAMENTALS"))))
+
+
+(defrule sell-stock-uptrend-high-pe-negative-fundamentals
+   (stock
+      (trend uptrend)
+      (pe high)
+      (revenue negative)
+      (earnings negative))
+   (not (recommendation))
+   =>
+   (assert
+      (recommendation
+         (action sell)
+         (rule "SELL-UPTREND-HIGH-PE-NEGATIVE-FUNDAMENTALS"))))

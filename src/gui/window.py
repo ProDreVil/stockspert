@@ -27,6 +27,8 @@ from market import Market
 
 class StockspertGUI:
     def __init__(self, starting_price=None):
+        with open("docs/simulation_record.txt", "w", encoding="utf-8") as file:
+            file.write("")
         self.root = tk.Tk()
         self.root.title(WINDOW_TITLE)
         self.root.configure(bg=BG_COLOR)
@@ -189,14 +191,43 @@ class StockspertGUI:
         self.date_label.configure(text=self.market.current_date.strftime("%B %d, %Y"))
         self.graph.update(self.market.candles)
 
+        history = self.market.price_history[-30:]
+
         recommendation, rule, confidence = get_recommendation(
             self.market_gui["trend_var"].get().lower(),
             self.market_gui["pe_var"].get().lower(),
             self.market_gui["revenue_var"].get().lower(),
             self.market_gui["earnings_var"].get().lower(),
             self.market_gui["volume_var"].get().lower(),
-            self.market.price_history
+            history
         )
+
+        with open("docs/simulation_record.txt", "a", encoding="utf-8") as file:
+            file.write("========== SIMULATION RECORD ==========\n")
+
+            file.write(f"Current Price : ${self.market.current_price:.2f}\n")
+            file.write(f"Trend         : {self.market_gui['trend_var'].get()}\n")
+            file.write(f"P/E           : {self.market_gui['pe_var'].get()}\n")
+            file.write(f"Revenue       : {self.market_gui['revenue_var'].get()}\n")
+            file.write(f"Earnings      : {self.market_gui['earnings_var'].get()}\n")
+            file.write(f"Volume        : {self.market_gui['volume_var'].get()}\n")
+
+            file.write("\n--- Last 30 Closing Prices ---\n")
+
+            for i, p in enumerate(history, 1):
+                file.write(f"{i:02d}: ${p:.2f}\n")
+
+            file.write(f"\nLowest  : ${min(history):.2f}\n")
+            file.write(f"Highest : ${max(history):.2f}\n")
+            file.write(f"Average : ${sum(history) / len(history):.2f}\n")
+
+            file.write("\n--- Expert System ---\n")
+
+            file.write(f"Recommendation : {recommendation}\n")
+            file.write(f"Rule Fired     : {rule}\n")
+            file.write(f"Confidence     : {confidence}%\n")
+
+            file.write("=======================================\n")
 
         colors = {
             "BUY": BUY_COLOR,

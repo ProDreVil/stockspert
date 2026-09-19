@@ -53,3 +53,17 @@
       (recommendation
          (action buy)
          (rule "BUY-UPTREND-HIGH-VOLUME"))))
+
+
+(defrule buy-low-price-positive-earnings
+   (declare (salience 20))
+   (stock
+      (price low)
+      (earnings positive)
+      (trend sideways|uptrend))
+   (not (recommendation))
+   =>
+   (assert
+      (recommendation
+         (action buy)
+         (rule "BUY-LOW-PRICE-POSITIVE-EARNINGS"))))
