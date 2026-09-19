@@ -1,6 +1,13 @@
 import tkinter as tk
 
-from config import GRAPH_COLOR, SECONDARY_TEXT
+from config import (
+    GRAPH_COLOR,
+    SECONDARY_TEXT,
+    BUY_COLOR,
+    SELL_COLOR,
+    TEXT_COLOR,
+)
+
 from gui.components import (
     create_button,
     create_entry,
@@ -23,10 +30,12 @@ def build_portfolio(parent):
     stat_labels = {}
 
     for label, value in stats:
+
         row = tk.Frame(
             panel,
             bg=GRAPH_COLOR
         )
+
         row.pack(
             fill="x",
             padx=15,
@@ -47,12 +56,21 @@ def build_portfolio(parent):
             bg=GRAPH_COLOR,
             font=("Consolas", 10)
         )
+
         value_label.pack(side="right")
 
         stat_labels[label] = value_label
 
-    pl_row = tk.Frame(panel, bg=GRAPH_COLOR)
-    pl_row.pack(fill="x", padx=15, pady=(12, 2))
+    pl_row = tk.Frame(
+        panel,
+        bg=GRAPH_COLOR
+    )
+
+    pl_row.pack(
+        fill="x",
+        padx=15,
+        pady=(12, 2)
+    )
 
     create_label(
         pl_row,
@@ -68,11 +86,18 @@ def build_portfolio(parent):
         bg=GRAPH_COLOR,
         font=("Consolas", 10)
     )
+
     pl_label.pack(side="right")
 
+    return_row = tk.Frame(
+        panel,
+        bg=GRAPH_COLOR
+    )
 
-    return_row = tk.Frame(panel, bg=GRAPH_COLOR)
-    return_row.pack(fill="x", padx=15)
+    return_row.pack(
+        fill="x",
+        padx=15
+    )
 
     create_label(
         return_row,
@@ -88,69 +113,94 @@ def build_portfolio(parent):
         bg=GRAPH_COLOR,
         font=("Consolas", 10)
     )
+
     return_label.pack(side="right")
 
-    buy = tk.Frame(
+    trade = tk.Frame(
         panel,
         bg=GRAPH_COLOR
     )
-    buy.pack(
+
+    trade.pack(
         fill="x",
         padx=15,
-        pady=(15, 5)
+        pady=(12, 10)
+    )
+
+    quantity_row = tk.Frame(
+        trade,
+        bg=GRAPH_COLOR
+    )
+
+    quantity_row.pack(
+        pady=(0, 6)
     )
 
     create_label(
-        buy,
-        "Buy",
-        bg=GRAPH_COLOR
-    ).pack(side="left")
-
-    buy_entry = create_entry(
-        buy,
-        width=5
+        quantity_row,
+        "Quantity:",
+        bg=GRAPH_COLOR,
+        font=("Segoe UI", 10, "bold")
+    ).pack(
+        side="left"
     )
-    buy_entry.pack(
+
+    quantity_entry = create_entry(
+        quantity_row,
+        width=7
+    )
+
+    quantity_entry.configure(
+        font=("Consolas", 10, "bold")
+    )
+
+    quantity_entry.pack(
         side="left",
-        padx=5
+        padx=(6, 0)
+    )
+
+    buttons = tk.Frame(
+        trade,
+        bg=GRAPH_COLOR
+    )
+
+    buttons.pack(
+        pady=(0, 2)
     )
 
     buy_button = create_button(
-        buy,
+        buttons,
         "BUY"
     )
-    buy_button.pack(side="left")
 
-    sell = tk.Frame(
-        panel,
-        bg=GRAPH_COLOR
-    )
-    sell.pack(
-        fill="x",
-        padx=15,
-        pady=(0, 10)
+    buy_button.configure(
+        bg=BUY_COLOR,
+        fg=TEXT_COLOR,
+        font=("Segoe UI", 10, "bold")
     )
 
-    create_label(
-        sell,
-        "Sell",
-        bg=GRAPH_COLOR
-    ).pack(side="left")
-
-    sell_entry = create_entry(
-        sell,
-        width=5
-    )
-    sell_entry.pack(
+    buy_button.pack(
         side="left",
-        padx=5
+        padx=(0, 6),
+        ipadx=10
     )
 
     sell_button = create_button(
-        sell,
+        buttons,
         "SELL"
     )
-    sell_button.pack(side="left")
+
+    sell_button.configure(
+        bg=SELL_COLOR,
+        fg=TEXT_COLOR,
+        font=("Segoe UI", 10, "bold")
+    )
+
+    sell_button.pack(
+        side="left",
+        padx=(6, 0),
+        ipadx=10
+    )
 
     return {
         "frame": panel,
@@ -160,8 +210,7 @@ def build_portfolio(parent):
         "value": stat_labels["Value"],
         "pl": pl_label,
         "return": return_label,
-        "buy_entry": buy_entry,
+        "quantity_entry": quantity_entry,
         "buy_button": buy_button,
-        "sell_entry": sell_entry,
         "sell_button": sell_button,
     }

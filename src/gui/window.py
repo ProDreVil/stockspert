@@ -468,28 +468,33 @@ class StockspertGUI:
         )
 
     def buy_stock(self):
+
         try:
-            quantity = int(self.portfolio["buy_entry"].get())
+            quantity = int(self.portfolio["quantity_entry"].get())
         except ValueError:
             return
 
         current_price = self.market.candles[-1]["close"]
 
         if self.account.buy(current_price, quantity):
-            self.portfolio["buy_entry"].delete(0, tk.END)
+            self.portfolio["quantity_entry"].delete(0, tk.END)
+
         self.update_portfolio_ui()
 
+
     def sell_stock(self):
+
         try:
-            quantity = int(self.portfolio["sell_entry"].get())
+            quantity = int(self.portfolio["quantity_entry"].get())
         except ValueError:
             return
 
         current_price = self.market.candles[-1]["close"]
 
         if self.account.sell(current_price, quantity):
-            self.portfolio["sell_entry"].delete(0, tk.END)
-            self.update_portfolio_ui()
+            self.portfolio["quantity_entry"].delete(0, tk.END)
+
+        self.update_portfolio_ui()
 
     def run(self):
         self.root.mainloop()

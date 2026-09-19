@@ -42,9 +42,9 @@ def build_market(parent, on_apply=None, initial_price=100.00):
         )
         row.pack(fill="x", pady=2)
 
-        row.grid_columnconfigure(0, weight=1)
-        row.grid_columnconfigure(1, weight=1)
-        row.grid_columnconfigure(2, weight=1)
+        row.grid_columnconfigure(0, minsize=100)
+        row.grid_columnconfigure(1, minsize=100)
+        row.grid_columnconfigure(2, minsize=100)
 
         create_label(
             row,
@@ -106,19 +106,55 @@ def build_market(parent, on_apply=None, initial_price=100.00):
 
     price_group = create_group((5, 8))
 
-    create_market_row(
+    price_row = tk.Frame(
         price_group,
-        "price",
-        "Price",
-        price_var
+        bg=GRAPH_COLOR
     )
+    price_row.pack(fill="x", pady=2)
 
-    create_market_row(
+    price_row.grid_columnconfigure(0, minsize=100)
+    price_row.grid_columnconfigure(1, minsize=100)
+    price_row.grid_columnconfigure(2, minsize=100)
+
+    create_label(
+        price_row,
+        "Price",
+        color=SECONDARY_TEXT,
+        bg=GRAPH_COLOR,
+        font=("Segoe UI", 10, "bold")
+    ).grid(row=0, column=0, sticky="w")
+
+    create_label(
+        price_row,
+        textvariable=price_var,
+        bg=GRAPH_COLOR,
+        font=("Consolas", 10, "bold")
+    ).grid(row=0, column=2, sticky="e")
+
+    change_row = tk.Frame(
         price_group,
-        "change",
-        "Change",
-        change_var
+        bg=GRAPH_COLOR
     )
+    change_row.pack(fill="x", pady=2)
+
+    change_row.grid_columnconfigure(0, minsize=100)
+    change_row.grid_columnconfigure(1, minsize=100)
+    change_row.grid_columnconfigure(2, minsize=100)
+
+    create_label(
+        change_row,
+        "Change",
+        color=SECONDARY_TEXT,
+        bg=GRAPH_COLOR,
+        font=("Segoe UI", 10, "bold")
+    ).grid(row=0, column=0, sticky="w")
+
+    create_label(
+        change_row,
+        textvariable=change_var,
+        bg=GRAPH_COLOR,
+        font=("Consolas", 10, "bold")
+    ).grid(row=0, column=2, sticky="e")
 
     market_group = create_group(8)
 
