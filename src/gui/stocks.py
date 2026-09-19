@@ -4,6 +4,7 @@ from config import (
     GRAPH_COLOR,
     SECONDARY_TEXT,
 )
+
 from gui.components import (
     create_label,
     create_section,
@@ -11,20 +12,29 @@ from gui.components import (
 
 
 def build_market(parent, on_apply=None, initial_price=100.00):
+
     panel = create_section(parent, "MARKET INFORMATION")
+    panel.configure(width=250)
+    panel.pack_propagate(False)
 
     price_var = tk.StringVar(value=f"${initial_price:.2f}")
     change_var = tk.StringVar(value="+$0.00 (+0.00%)")
+
     trend_var = tk.StringVar(value="Uptrend")
     trend_change_var = tk.StringVar(value="+0.00%")
+
     pe_var = tk.StringVar(value="Fair")
     pe_value_var = tk.StringVar(value="18.7")
+
     revenue_var = tk.StringVar(value="Positive")
     revenue_value_var = tk.StringVar(value="+6.2%")
+
     earnings_var = tk.StringVar(value="Positive")
     earnings_value_var = tk.StringVar(value="+8.4%")
+
     volume_var = tk.StringVar(value="Average")
     volume_value_var = tk.StringVar(value="1.24M")
+
     updated_var = tk.StringVar(value="January 1, 2026")
 
     labels = {}
@@ -40,11 +50,12 @@ def build_market(parent, on_apply=None, initial_price=100.00):
             parent_frame,
             bg=GRAPH_COLOR
         )
-        row.pack(fill="x", pady=2)
+
+        row.pack(anchor="w", pady=2)
 
         row.grid_columnconfigure(0, minsize=100)
-        row.grid_columnconfigure(1, minsize=100)
-        row.grid_columnconfigure(2, minsize=100)
+        row.grid_columnconfigure(1, minsize=60)
+        row.grid_columnconfigure(2, minsize=120)
 
         create_label(
             row,
@@ -97,11 +108,13 @@ def build_market(parent, on_apply=None, initial_price=100.00):
             panel,
             bg=GRAPH_COLOR
         )
+
         group.pack(
             fill="x",
             padx=15,
             pady=pady
         )
+
         return group
 
     price_group = create_group((5, 8))
@@ -110,11 +123,15 @@ def build_market(parent, on_apply=None, initial_price=100.00):
         price_group,
         bg=GRAPH_COLOR
     )
-    price_row.pack(fill="x", pady=2)
+
+    price_row.pack(
+        anchor="w",
+        pady=2
+    )
 
     price_row.grid_columnconfigure(0, minsize=100)
-    price_row.grid_columnconfigure(1, minsize=100)
-    price_row.grid_columnconfigure(2, minsize=100)
+    price_row.grid_columnconfigure(1, minsize=60)
+    price_row.grid_columnconfigure(2, minsize=120)
 
     create_label(
         price_row,
@@ -122,24 +139,36 @@ def build_market(parent, on_apply=None, initial_price=100.00):
         color=SECONDARY_TEXT,
         bg=GRAPH_COLOR,
         font=("Segoe UI", 10, "bold")
-    ).grid(row=0, column=0, sticky="w")
+    ).grid(
+        row=0,
+        column=0,
+        sticky="w"
+    )
 
     create_label(
         price_row,
         textvariable=price_var,
         bg=GRAPH_COLOR,
         font=("Consolas", 10, "bold")
-    ).grid(row=0, column=2, sticky="e")
+    ).grid(
+        row=0,
+        column=2,
+        sticky="e"
+    )
 
     change_row = tk.Frame(
         price_group,
         bg=GRAPH_COLOR
     )
-    change_row.pack(fill="x", pady=2)
+
+    change_row.pack(
+        anchor="w",
+        pady=2
+    )
 
     change_row.grid_columnconfigure(0, minsize=100)
-    change_row.grid_columnconfigure(1, minsize=100)
-    change_row.grid_columnconfigure(2, minsize=100)
+    change_row.grid_columnconfigure(1, minsize=60)
+    change_row.grid_columnconfigure(2, minsize=120)
 
     create_label(
         change_row,
@@ -147,14 +176,22 @@ def build_market(parent, on_apply=None, initial_price=100.00):
         color=SECONDARY_TEXT,
         bg=GRAPH_COLOR,
         font=("Segoe UI", 10, "bold")
-    ).grid(row=0, column=0, sticky="w")
+    ).grid(
+        row=0,
+        column=0,
+        sticky="w"
+    )
 
     create_label(
         change_row,
         textvariable=change_var,
         bg=GRAPH_COLOR,
         font=("Consolas", 10, "bold")
-    ).grid(row=0, column=2, sticky="e")
+    ).grid(
+        row=0,
+        column=2,
+        sticky="e"
+    )
 
     market_group = create_group(8)
 

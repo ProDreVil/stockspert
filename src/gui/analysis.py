@@ -202,7 +202,7 @@ def update_reasons(reasons_frame, rule):
             color=color,
             bg=GRAPH_COLOR,
             justify="left",
-            font=("Consolas", 10, "bold")
+            font=("Consolas", 10)
         ).pack(
             anchor="w"
         )
@@ -265,7 +265,9 @@ def build_analysis(parent):
         "Rule Fired: BUY-UPTREND-LOW-PE",
         color=SECONDARY_TEXT,
         bg=GRAPH_COLOR,
-        font=("Consolas", 10, "bold")
+        font=("Consolas", 10, "bold"),
+        wraplength=320,
+        justify="left"
     )
     rule.pack(
         anchor="w",
