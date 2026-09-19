@@ -25,7 +25,7 @@ def get_recommendation(
 
     if shares <= 0:
         position = "none"
-    elif current > average_buy_price:
+    elif current >= average_buy_price * 1.10:
         position = "profit"
     else:
         position = "loss"
@@ -105,6 +105,9 @@ def get_recommendation(
             volume,
             position
         )
+        if recommendation in ("BUY", "SELL") and confidence <= 50:
+            recommendation = "HOLD"
+            rule = "HOLD-LOW-CONFIDENCE"
 
         return recommendation, rule, confidence
 

@@ -107,7 +107,7 @@ class Market:
         return "Neutral"
 
     def get_earnings_classification(self):
-        if self.earnings_growth > 2:
+        if self.earnings_growth > 0:
             return "Positive"
         return "Negative"
 

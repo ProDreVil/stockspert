@@ -141,6 +141,11 @@ def update_reasons(reasons_frame, rule):
             ("Position is at a Loss", HOLD_COLOR),
             ("Selling Would Realize a Loss", SELL_COLOR),
         ],
+
+        "HOLD-LOW-CONFIDENCE": [
+            ("Low Recommendation Confidence", HOLD_COLOR),
+            ("Insufficient Strength to Buy or Sell", HOLD_COLOR),
+        ],
         
         "SELL-DOWNTREND-NEGATIVE-FUNDAMENTALS": [
             ("Downtrend", SELL_COLOR),
