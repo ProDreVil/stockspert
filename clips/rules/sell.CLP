@@ -110,3 +110,15 @@
       (recommendation
          (action sell)
          (rule "SELL-UPTREND-HIGH-PE-NEGATIVE-FUNDAMENTALS"))))
+
+
+(defrule convert-sell-loss-to-hold
+   ?r <- (recommendation
+      (action sell)
+      (rule ?rule))
+   (stock
+      (position loss|none))
+   =>
+   (modify ?r
+      (action hold)
+      (rule "HOLD-POSITION-LOSS")))

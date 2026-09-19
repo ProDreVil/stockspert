@@ -3,6 +3,7 @@ class Account:
         self.cash = starting_cash
         self.shares = 0
         self.invested = 0.00
+        self.average_buy_price = 0.00
 
     def buy(self, price, quantity):
         total_cost = price * quantity
@@ -12,6 +13,12 @@ class Account:
 
         if total_cost > self.cash:
             return False
+
+        old_total = self.average_buy_price * self.shares
+        new_total = old_total + total_cost
+        new_shares = self.shares + quantity
+
+        self.average_buy_price = new_total / new_shares
 
         self.cash -= total_cost
         self.shares += quantity
@@ -30,7 +37,10 @@ class Account:
 
         self.cash += total_value
         self.shares -= quantity
-        self.invested -= total_value
+        self.invested -= self.average_buy_price * quantity
+
+        if self.shares == 0:
+            self.average_buy_price = 0.00
 
         return True
 

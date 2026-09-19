@@ -14,12 +14,21 @@ def get_recommendation(
     revenue,
     earnings,
     volume,
-    price_history
+    price_history,
+    shares,
+    average_buy_price
 ):
+    price_history = price_history[-10:]
     lowest = min(price_history)
     highest = max(price_history)
     current = price_history[-1]
-    price_history = price_history[-10:]
+
+    if shares <= 0:
+        position = "none"
+    elif current > average_buy_price:
+        position = "profit"
+    else:
+        position = "loss"
 
     price_range = highest - lowest
 
@@ -56,7 +65,10 @@ def get_recommendation(
             (revenue {revenue})
             (earnings {earnings})
             (volume {volume})
-            (price {price_level})))
+            (price {price_level})
+            (shares {shares})
+            (average-buy-price {average_buy_price})
+            (position {position})))
         (run)
         (exit)
         """
@@ -90,7 +102,8 @@ def get_recommendation(
             rule,
             recommendation,
             price_history,
-            volume
+            volume,
+            position
         )
 
         return recommendation, rule, confidence

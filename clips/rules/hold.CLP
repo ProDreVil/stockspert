@@ -216,3 +216,15 @@
       (recommendation
          (action hold)
          (rule "HOLD-UPTREND-HIGH-PE-NEGATIVE-EARNINGS"))))
+
+
+(defrule hold-stock-sideways-negative-earnings
+   (stock
+      (trend sideways)
+      (earnings negative))
+   (not (recommendation))
+   =>
+   (assert
+      (recommendation
+         (action hold)
+         (rule "HOLD-SIDEWAYS-NEGATIVE-EARNINGS"))))

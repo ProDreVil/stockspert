@@ -18,6 +18,8 @@ BASE_CONFIDENCE = {
     "HOLD-DOWNTREND-NEGATIVE-REVENUE": 55,
     "HOLD-UPTREND-FAIR-PE-NEGATIVE-EARNINGS": 55,
     "HOLD-UPTREND-HIGH-PE-NEGATIVE-EARNINGS": 50,
+    "HOLD-SIDEWAYS-NEGATIVE-EARNINGS": 65,
+    "HOLD-POSITION-LOSS": 55,
 
     "SELL-DOWNTREND-NEGATIVE-FUNDAMENTALS": 90,
     "SELL-SIDEWAYS-NEGATIVE-EARNINGS": 80,
@@ -135,9 +137,13 @@ def calculate_confidence(
     rule,
     recommendation,
     price_history,
-    volume
+    volume,
+    position
 ):
     confidence = get_base_confidence(rule)
+
+    if recommendation == "SELL" and position == "loss":
+        confidence -= 20
 
     history_direction = get_history_direction(
         price_history

@@ -132,6 +132,16 @@ def update_reasons(reasons_frame, rule):
             ("Negative Earnings Growth", SELL_COLOR),
         ],
 
+        "HOLD-SIDEWAYS-NEGATIVE-EARNINGS": [
+            ("Sideways Trend", HOLD_COLOR),
+            ("Negative Earnings Growth", SELL_COLOR),
+        ],
+
+        "HOLD-POSITION-LOSS": [
+            ("Position is at a Loss", HOLD_COLOR),
+            ("Selling Would Realize a Loss", SELL_COLOR),
+        ],
+        
         "SELL-DOWNTREND-NEGATIVE-FUNDAMENTALS": [
             ("Downtrend", SELL_COLOR),
             ("Negative Revenue Growth", SELL_COLOR),

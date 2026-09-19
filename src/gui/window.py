@@ -144,7 +144,9 @@ class StockspertGUI:
             revenue.lower(),
             earnings.lower(),
             volume.lower(),
-            self.market.price_history
+            self.market.price_history,
+            self.account.shares,
+            self.account.average_buy_price
         )
 
         recommendation_colors = {
@@ -207,7 +209,9 @@ class StockspertGUI:
             self.market_gui["revenue_var"].get().lower(),
             self.market_gui["earnings_var"].get().lower(),
             self.market_gui["volume_var"].get().lower(),
-            history
+            history,
+            self.account.shares,
+            self.account.average_buy_price
         )
 
         with open("docs/record.txt", "a", encoding="utf-8") as file:
