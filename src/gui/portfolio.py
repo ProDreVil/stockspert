@@ -37,40 +37,58 @@ def build_portfolio(parent):
             row,
             label,
             color=SECONDARY_TEXT,
-            bg=GRAPH_COLOR
+            bg=GRAPH_COLOR,
+            font=("Segoe UI", 10, "bold")
         ).pack(side="left")
 
         value_label = create_label(
             row,
             value,
-            bg=GRAPH_COLOR
+            bg=GRAPH_COLOR,
+            font=("Consolas", 10)
         )
         value_label.pack(side="right")
 
         stat_labels[label] = value_label
 
-    pl_label = create_label(
-        panel,
-        "P/L        $0.00",
+    pl_row = tk.Frame(panel, bg=GRAPH_COLOR)
+    pl_row.pack(fill="x", padx=15, pady=(12, 2))
+
+    create_label(
+        pl_row,
+        "P/L",
         color=SECONDARY_TEXT,
-        bg=GRAPH_COLOR
+        bg=GRAPH_COLOR,
+        font=("Segoe UI", 10, "bold")
+    ).pack(side="left")
+
+    pl_label = create_label(
+        pl_row,
+        "$0.00",
+        bg=GRAPH_COLOR,
+        font=("Consolas", 10)
     )
-    pl_label.pack(
-        anchor="w",
-        padx=15,
-        pady=(12, 2)
-    )
+    pl_label.pack(side="right")
+
+
+    return_row = tk.Frame(panel, bg=GRAPH_COLOR)
+    return_row.pack(fill="x", padx=15)
+
+    create_label(
+        return_row,
+        "Return",
+        color=SECONDARY_TEXT,
+        bg=GRAPH_COLOR,
+        font=("Segoe UI", 10, "bold")
+    ).pack(side="left")
 
     return_label = create_label(
-        panel,
-        "Return     0.00%",
-        color=SECONDARY_TEXT,
-        bg=GRAPH_COLOR
+        return_row,
+        "0.00%",
+        bg=GRAPH_COLOR,
+        font=("Consolas", 10)
     )
-    return_label.pack(
-        anchor="w",
-        padx=15
-    )
+    return_label.pack(side="right")
 
     buy = tk.Frame(
         panel,

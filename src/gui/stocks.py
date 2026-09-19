@@ -50,7 +50,8 @@ def build_market(parent, on_apply=None, initial_price=100.00):
             row,
             label,
             color=SECONDARY_TEXT,
-            bg=GRAPH_COLOR
+            bg=GRAPH_COLOR,
+            font=("Segoe UI", 10, "bold")
         ).grid(
             row=0,
             column=0,
@@ -60,8 +61,10 @@ def build_market(parent, on_apply=None, initial_price=100.00):
         value_label = create_label(
             row,
             textvariable=value_var,
-            bg=GRAPH_COLOR
+            bg=GRAPH_COLOR,
+            font=("Consolas", 10, "bold")
         )
+
         value_label.grid(
             row=0,
             column=1,
@@ -74,8 +77,10 @@ def build_market(parent, on_apply=None, initial_price=100.00):
             classification_label = create_label(
                 row,
                 textvariable=classification_var,
-                bg=GRAPH_COLOR
+                bg=GRAPH_COLOR,
+                font=("Consolas", 10, "bold")
             )
+
             classification_label.grid(
                 row=0,
                 column=2,
@@ -155,15 +160,6 @@ def build_market(parent, on_apply=None, initial_price=100.00):
         "Volume",
         volume_value_var,
         volume_var
-    )
-
-    updated_group = create_group((8, 5))
-
-    create_market_row(
-        updated_group,
-        "updated",
-        "Updated",
-        updated_var
     )
 
     return {

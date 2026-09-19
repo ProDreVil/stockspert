@@ -450,7 +450,9 @@ class StockspertGUI:
         )
 
         value = self.account.get_value(current_price)
+
         profit_loss = self.account.get_profit_loss(current_price)
+
         return_percent = self.account.get_return(current_price)
 
         self.portfolio["value"].config(
@@ -458,11 +460,11 @@ class StockspertGUI:
         )
 
         self.portfolio["pl"].config(
-            text=f"P/L        ${profit_loss:,.2f}"
+            text=f"${profit_loss:,.2f}"
         )
 
         self.portfolio["return"].config(
-            text=f"Return     {return_percent:.2f}%"
+            text=f"{return_percent:.2f}%"
         )
 
     def buy_stock(self):
